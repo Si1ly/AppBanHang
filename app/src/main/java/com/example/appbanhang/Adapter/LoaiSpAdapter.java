@@ -55,11 +55,13 @@ public class LoaiSpAdapter extends BaseAdapter {
             viewHolder.textView = view.findViewById(R.id.item_tensp);
             viewHolder.imageView = view.findViewById(R.id.item_image);
             view.setTag(viewHolder);
-        }else{
+        }else {
             viewHolder = (ViewHolder) view.getTag();
+
+        }
             viewHolder.textView.setText(array.get(i).getTensanpham());
             Glide.with(context).load(array.get(i).getHinhanh()).into(viewHolder.imageView);
-        }
+
         return view;
     }
 }

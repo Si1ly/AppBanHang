@@ -70,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<LoaiSp>> call, Response<List<LoaiSp>> response) {
                 if (response.isSuccessful()&&response.body()!=null){
-                    Toast.makeText(getApplicationContext(),response.body().get(0).getTensanpham(),Toast.LENGTH_LONG).show();
+                    mangLoaiSp = response.body();
+                    loaiSpAdapter = new LoaiSpAdapter(mangLoaiSp,getApplicationContext());
+                    listViewmanhinhchinh.setAdapter(loaiSpAdapter);
                 }
             }
 
@@ -79,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        apiBanHang.getLoaiSp().cancel();
+        super.onDestroy();
     }
 
     private void ActionviewLipper() {
