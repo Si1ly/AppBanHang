@@ -1,24 +1,40 @@
-package com.example.appbanhang;
+package com.example.appbanhang.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toolbar;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
+import com.example.appbanhang.Adapter.LoaiSpAdapter;
+import com.example.appbanhang.Model.LoaiSp;
+import com.example.appbanhang.R;
+import com.example.appbanhang.Retrofit.ApiBanHang;
+import com.example.appbanhang.Retrofit.RetrofitClient;
+import com.example.appbanhang.Utils.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.internal.Util;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -27,14 +43,42 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ListView listViewmanhinhchinh;
     DrawerLayout drawerLayout;
+    LoaiSpAdapter loaiSpAdapter;
+    List<LoaiSp> mangLoaiSp;
+    ApiBanHang apiBanHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         anhxa();
         ActionBar();
         ActionviewLipper();
+        if(isConnected(this)){
+            Toast.makeText(this, "Ok", Toast.LENGTH_LONG).show();
+            ActionviewLipper();
+            getLoaiSanPham();
+        }else{
+            Toast.makeText(this, "Khong co Internet", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void getLoaiSanPham() {
+        apiBanHang.getLoaiSp().enqueue(new Callback<List<LoaiSp>>() {
+            @Override
+            public void onResponse(Call<List<LoaiSp>> call, Response<List<LoaiSp>> response) {
+                if (response.isSuccessful()&&response.body()!=null){
+                    Toast.makeText(getApplicationContext(),response.body().get(0).getTensanpham(),Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<LoaiSp>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void ActionviewLipper() {
@@ -68,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setSupportActionBar(Toolbar toolbar) {
-    }
 
 
     private void anhxa(){
@@ -79,6 +121,18 @@ public class MainActivity extends AppCompatActivity {
         navigationView =(NavigationView) findViewById(R.id.navigationview);
         listViewmanhinhchinh=(ListView) findViewById(R.id.listviewanhinhchinh);
         drawerLayout =(DrawerLayout) findViewById(R.id.DrawerLayout);
+        mangLoaiSp = new ArrayList<>();
+        loaiSpAdapter = new LoaiSpAdapter(mangLoaiSp,getApplicationContext());
+        listViewmanhinhchinh.setAdapter(loaiSpAdapter);
     }
-
+    private boolean isConnected(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobile = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if(wifi != null && wifi.isConnected() || mobile != null && mobile.isConnected()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
