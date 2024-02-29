@@ -43,7 +43,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.Sa
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class SanPhamMoiViewHolder extends RecyclerView.ViewHolder{

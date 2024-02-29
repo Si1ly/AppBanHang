@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     List<LoaiSp> mangLoaiSp;
     ApiBanHang apiBanHang;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +64,33 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Ok", Toast.LENGTH_LONG).show();
             ActionviewLipper();
             getLoaiSanPham();
+            getEventClick();
         }else{
             Toast.makeText(this, "Khong co Internet", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void getEventClick() {
+        listViewmanhinhchinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        Intent trangchu = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(trangchu);
+                        break;
+                    case 1:
+                        Intent dienthoai = new Intent(getApplicationContext(), DienThoaiActivity.class);
+                        dienthoai.putExtra("loai",1);
+                        startActivity(dienthoai);
+                        break;
+                    case 2:
+                        Intent laptop = new Intent(getApplicationContext(), LapTopActivity.class);
+                        startActivity(laptop);
+                        break;
+                }
+            }
+        });
     }
 
     private void getLoaiSanPham() {
