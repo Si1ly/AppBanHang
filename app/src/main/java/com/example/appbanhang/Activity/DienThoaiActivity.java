@@ -2,6 +2,7 @@ package com.example.appbanhang.Activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -31,9 +32,10 @@ public class DienThoaiActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dienthoai);
+        loai = getIntent().getIntExtra("loai",1);
         link();
         ActionBar();
-        getData();
+        getData(page);
         addEventload();
 
     }
@@ -76,17 +78,23 @@ public class DienThoaiActivity extends AppCompatActivity {
         },2000);
     }
 
-    private void getData() {
+    private void getData(int page) {
     }
 
     private void ActionBar() {
         // getSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
     private void link(){
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar_dienthoai);
         recyclerView = findViewById(R.id.recycleView_dt);
         linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
 

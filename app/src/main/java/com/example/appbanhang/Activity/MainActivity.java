@@ -23,6 +23,7 @@ import android.widget.ViewFlipper;
 import com.bumptech.glide.Glide;
 import com.example.appbanhang.Adapter.LoaiSpAdapter;
 import com.example.appbanhang.Model.LoaiSp;
+import com.example.appbanhang.Model.SanPhamMoi;
 import com.example.appbanhang.R;
 import com.example.appbanhang.Retrofit.ApiBanHang;
 import com.example.appbanhang.Retrofit.RetrofitClient;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     LoaiSpAdapter loaiSpAdapter;
     List<LoaiSp> mangLoaiSp;
     ApiBanHang apiBanHang;
+    List<SanPhamMoi> mangSanPhammoi;
 
 
 
@@ -85,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(dienthoai);
                         break;
                     case 2:
-                        Intent laptop = new Intent(getApplicationContext(), LapTopActivity.class);
+                        Intent laptop = new Intent(getApplicationContext(), DienThoaiActivity.class);
+                        laptop.putExtra("loai",2);
                         startActivity(laptop);
                         break;
                 }
@@ -160,6 +163,11 @@ public class MainActivity extends AppCompatActivity {
         mangLoaiSp = new ArrayList<>();
         loaiSpAdapter = new LoaiSpAdapter(mangLoaiSp,getApplicationContext());
         listViewmanhinhchinh.setAdapter(loaiSpAdapter);
+        mangSanPhammoi = new ArrayList<>();
+        if (Utils.mangGiohang == null) {
+            Utils.mangGiohang = new ArrayList<>();
+        }
+
     }
     private boolean isConnected(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
