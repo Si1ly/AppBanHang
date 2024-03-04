@@ -5,3 +5,6 @@
 - getData trong DienThoaiAcitivity cần xử lí để lấy dữ liệu trong database theo từng loại
 
 *** Đối với những dữ liệu sử dụng nhiều trong các Activity, sử dụng 1 lớp riêng để lưu trữ
+*** Build 1 Interface để lưu trữ giá trị dùng trong nhiều Activity
+** Đối với các sự kiện dùng nhiều lần , sử dụng Interface để lưu trữ
+* Tìm hiểu về EventBus để xử lí các sự kiện

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.example.appbanhang.Retrofit.ApiBanHang;
 import com.example.appbanhang.Retrofit.RetrofitClient;
 import com.example.appbanhang.Utils.Utils;
 import com.google.android.material.navigation.NavigationView;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +52,8 @@ public class MainActivity extends AppCompatActivity {
     List<LoaiSp> mangLoaiSp;
     ApiBanHang apiBanHang;
     List<SanPhamMoi> mangSanPhammoi;
-
-
-
+    NotificationBadge notificationBadge;
+    FrameLayout frameLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,21 +155,46 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void anhxa(){
-        toolbar =(Toolbar) findViewById(R.id.Toolbarmanhinhchinh);
-        viewFlipper =(ViewFlipper) findViewById(R.id.ViewFlipper);
-        recyclerViewmanhinhchinh =(RecyclerView) findViewById(R.id.recyclewview);
-        navigationView =(NavigationView) findViewById(R.id.navigationview);
-        listViewmanhinhchinh=(ListView) findViewById(R.id.listviewanhinhchinh);
-        drawerLayout =(DrawerLayout) findViewById(R.id.DrawerLayout);
+        toolbar = findViewById(R.id.Toolbarmanhinhchinh);
+        viewFlipper = findViewById(R.id.ViewFlipper);
+        recyclerViewmanhinhchinh = findViewById(R.id.recyclewview);
+        navigationView = findViewById(R.id.navigationview);
+        listViewmanhinhchinh= findViewById(R.id.listviewanhinhchinh);
+        drawerLayout = findViewById(R.id.DrawerLayout);
         mangLoaiSp = new ArrayList<>();
         loaiSpAdapter = new LoaiSpAdapter(mangLoaiSp,getApplicationContext());
         listViewmanhinhchinh.setAdapter(loaiSpAdapter);
         mangSanPhammoi = new ArrayList<>();
+        notificationBadge = findViewById(R.id.menu_sl_main);
         if (Utils.mangGiohang == null) {
             Utils.mangGiohang = new ArrayList<>();
+        }else{
+            int total = 0;
+            for(int i=0;i<Utils.mangGiohang.size();i++){
+                total += total + Utils.mangGiohang.get(i).getSl();
+            }
+            notificationBadge.setText(String.valueOf(total));
         }
-
+        frameLayout = findViewById(R.id.frame_main);
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(i);
+            }
+        });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int total = 0;
+        for(int i=0;i<Utils.mangGiohang.size();i++){
+            total += total + Utils.mangGiohang.get(i).getSl();
+        }
+        notificationBadge.setText(String.valueOf(total));
+    }
+
     private boolean isConnected(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);

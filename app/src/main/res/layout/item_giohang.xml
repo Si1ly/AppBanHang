@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:id="@+id/gioHang_tongGia"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:text="40000"></TextView>
         </LinearLayout>
     </LinearLayout>

@@ -2,10 +2,12 @@ package com.example.appbanhang.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ public class ChiTietActivity extends AppCompatActivity {
     Toolbar toolbar;
     SanPhamMoi sanPhamMoi;
     NotificationBadge notificationBadge;
+    FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,11 @@ public class ChiTietActivity extends AppCompatActivity {
             gioHang.setHinhsp(sanPhamMoi.getHinhanh());
             Utils.mangGiohang.add(gioHang);
         }
-        notificationBadge.setText(String.valueOf(Utils.mangGiohang.size()));
+        int total = 0;
+        for(int i=0;i<Utils.mangGiohang.size();i++){
+            total += total + Utils.mangGiohang.get(i).getSl();
+        }
+        notificationBadge.setText(String.valueOf(total));
     }
 
     private void initData() {
@@ -95,9 +102,6 @@ public class ChiTietActivity extends AppCompatActivity {
         Integer[] so = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
-
-
     }
 
     private void initView() {
@@ -109,8 +113,20 @@ public class ChiTietActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spinner);
         toolbar = findViewById(R.id.toolbar);
         notificationBadge = findViewById(R.id.menu_sl);
-        if(Utils.mangGiohang != null){
-            notificationBadge.setText(String.valueOf(Utils.mangGiohang.size()));
+        frameLayout = findViewById(R.id.frame_chiTiet);
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(i);
+            }
+        });
+        if (Utils.mangGiohang != null) {
+            int total = 0;
+            for(int i=0;i<Utils.mangGiohang.size();i++){
+                total += total + Utils.mangGiohang.get(i).getSl();
+            }
+            notificationBadge.setText(String.valueOf(total));
         }
     }
 
