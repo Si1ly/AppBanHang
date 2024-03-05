@@ -1,6 +1,8 @@
 package com.example.appbanhang.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.metrics.Event;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.example.appbanhang.InterfaceUsing.ImageClickListener;
 import com.example.appbanhang.Model.EventBus.TinhTongEvent;
 import com.example.appbanhang.Model.GioHang;
 import com.example.appbanhang.R;
+import com.example.appbanhang.Utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -56,6 +59,29 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                     if(gioHangList.get(pos).getSl()>1){
                         int newsl = gioHangList.get(pos).getSl() - 1;
                         gioHangList.get(pos).setSl(newsl);
+                        holder.item_gioHang_sl.setText(gioHangList.get(pos).getSl()+"");
+                        long sum = gioHang.getSl() * gioHang.getGiasp();
+                        holder.item_gioHang_sumgia.setText(decimalFormat.format(sum));
+                        EventBus.getDefault().postSticky(new TinhTongEvent());
+                    } else if (gioHangList.get(pos).getSl()==1) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
+                        builder.setTitle("Thông báo");
+                        builder.setMessage("Bạn có muốn xóa sản phẩm này ra khỏi giỏ hàng?");
+                        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Utils.mangGiohang.remove(pos);
+                                notifyDataSetChanged();
+                                EventBus.getDefault().postSticky(new TinhTongEvent());
+                            }
+                        });
+                        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+
                     }
                 } else if (giatri == 2) {
                     if(gioHangList.get(pos).getSl()<11){
@@ -63,10 +89,10 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                         gioHangList.get(pos).setSl(newsl);
                     }
                 }
-                holder.item_gioHang_sl.setText(gioHangList.get(pos).getSl()+"");
-                long sum = gioHang.getSl() * gioHang.getGiasp();
-                holder.item_gioHang_sumgia.setText(decimalFormat.format(sum));
-                EventBus.getDefault().postSticky(new TinhTongEvent());
+//                holder.item_gioHang_sl.setText(gioHangList.get(pos).getSl()+"");
+//                long sum = gioHang.getSl() * gioHang.getGiasp();
+//                holder.item_gioHang_sumgia.setText(decimalFormat.format(sum));
+//                EventBus.getDefault().postSticky(new TinhTongEvent());
             }
         });
     }

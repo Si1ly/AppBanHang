@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -68,6 +69,13 @@ public class GioHangActivity extends AppCompatActivity {
             gioHangAdapter = new GioHangAdapter(getApplicationContext(),Utils.mangGiohang);
             recyclerViewGioHang.setAdapter(gioHangAdapter);
         }
+        buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),ThanhToanActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void initView() {
@@ -89,6 +97,7 @@ public class GioHangActivity extends AppCompatActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+    //Cần xem lại
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void eventTinhTien(TinhTongEvent event){
         if(event != null){

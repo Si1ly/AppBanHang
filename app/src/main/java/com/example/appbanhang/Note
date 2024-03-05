@@ -3,6 +3,10 @@
 - Chưa code được hàm getData() trong DienThoaiActivity
 - Phần lấy dữ liệu từ database chưa xử lí được trong Vid 13
 - getData trong DienThoaiAcitivity cần xử lí để lấy dữ liệu trong database theo từng loại
+- Đăng kí dùng lại của NmtA
+- Phần eventTinhTien() của GioHangActivity chưa được sử dụng
+
+
 
 *** Đối với những dữ liệu sử dụng nhiều trong các Activity, sử dụng 1 lớp riêng để lưu trữ
 *** Build 1 Interface để lưu trữ giá trị dùng trong nhiều Activity
