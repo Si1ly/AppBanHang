@@ -22,6 +22,8 @@ public class ThanhToanActivity extends AppCompatActivity {
     TextView tongTien,email,sdt;
     EditText diaChi;
     AppCompatButton bt_datHang;
+    long sum;
+    int total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,14 @@ public class ThanhToanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thanh_toan);
         initView();
         initControl();
+        countItem();
+    }
+
+    private void countItem() {
+        total = 0;
+        for(int i=0;i<Utils.mangGiohang.size();i++){
+            total += total + Utils.mangGiohang.get(i).getSl();
+        }
     }
 
     private void initControl() {
@@ -41,7 +51,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         });
 
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        long sum = getIntent().getLongExtra("tongtien",0);
+        sum = getIntent().getLongExtra("tongtien",0);
         tongTien.setText(decimalFormat.format(sum));
         email.setText(Utils.currentUser.getEmail());
         sdt.setText(Utils.currentUser.getMobile());

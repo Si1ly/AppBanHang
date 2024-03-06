@@ -5,13 +5,15 @@
 - getData trong DienThoaiAcitivity cần xử lí để lấy dữ liệu trong database theo từng loại
 - Đăng kí, đăng nhập dùng lại giao diện của AppBanHang ( phần logic xử lí thì sử dụng trong Video )
 - Phần eventTinhTien() của GioHangActivity chưa được sử dụng
-
+- Chưa xong vid 31
 
 - Xử lí Api và Retrofit chưa làm gì cả, code xong hết giao diện các thứ quay lại code phần đó sau ( Vô cùng quan trọng )
 
 
+******* Học về RxAndroid ********
 
 *** Đối với những dữ liệu sử dụng nhiều trong các Activity, sử dụng 1 lớp riêng để lưu trữ
 *** Build 1 Interface để lưu trữ giá trị dùng trong nhiều Activity
 ** Đối với các sự kiện dùng nhiều lần , sử dụng Interface để lưu trữ
+** Khi sử lí dữ liệu từ database thì phải từ dữ liệu để suy ra các lớp
 * Tìm hiểu về EventBus để xử lí các sự kiện
