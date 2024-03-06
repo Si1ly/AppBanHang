@@ -3,8 +3,11 @@
 - Chưa code được hàm getData() trong DienThoaiActivity
 - Phần lấy dữ liệu từ database chưa xử lí được trong Vid 13
 - getData trong DienThoaiAcitivity cần xử lí để lấy dữ liệu trong database theo từng loại
-- Đăng kí dùng lại của NmtA
+- Đăng kí, đăng nhập dùng lại giao diện của AppBanHang ( phần logic xử lí thì sử dụng trong Video )
 - Phần eventTinhTien() của GioHangActivity chưa được sử dụng
+
+
+- Xử lí Api và Retrofit chưa làm gì cả, code xong hết giao diện các thứ quay lại code phần đó sau ( Vô cùng quan trọng )
 
 
 

@@ -43,6 +43,7 @@
                     android:textColor="@color/red"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:id="@+id/tongTien_tt"
                     ></TextView>
             </LinearLayout>
 
@@ -60,7 +61,8 @@
                     android:drawableEnd="@drawable/phone"
                     android:textColor="@color/red"
                     android:textSize="18sp"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold"
+                    android:id="@+id/sdt_tt"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -77,7 +79,8 @@
                     android:text="Email"
                     android:textColor="@color/red"
                     android:textSize="18sp"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold"
+                    android:id="@+id/email_tt"></TextView>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -95,6 +98,7 @@
             android:textColorHint="@color/red"
             android:drawableLeft="@drawable/locationb"
             android:drawablePadding="5sp"
+            android:id="@+id/diaChi_tt"
             ></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,5 +111,6 @@
         android:textColor="@color/red"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:background="@drawable/bt_corner"></androidx.appcompat.widget.AppCompatButton>
+        android:background="@drawable/bt_corner"
+        android:id="@+id/bt_Dathang_tt"></androidx.appcompat.widget.AppCompatButton>
 </androidx.constraintlayout.widget.ConstraintLayout>

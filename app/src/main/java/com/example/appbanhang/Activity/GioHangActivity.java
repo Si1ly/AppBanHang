@@ -31,6 +31,7 @@ public class GioHangActivity extends AppCompatActivity {
     RecyclerView recyclerViewGioHang;
     Button buy;
     GioHangAdapter gioHangAdapter;
+    long sum = 0;
 //    List<GioHang> gioHangList;
 
     @Override
@@ -43,7 +44,6 @@ public class GioHangActivity extends AppCompatActivity {
     }
 
     private void sum() {
-        long sum = 0;
         for(int i=0;i<Utils.mangGiohang.size();i++){
             sum = sum + (Utils.mangGiohang.get(i).getGiasp()*Utils.mangGiohang.get(i).getSl());
         }
@@ -73,6 +73,7 @@ public class GioHangActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),ThanhToanActivity.class);
+                i.putExtra("tongtien",sum);
                 startActivity(i);
             }
         });

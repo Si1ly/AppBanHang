@@ -13,4 +13,5 @@ import retrofit2.http.GET;
 public interface ApiBanHang {
     @GET("getloaisp.php")
     Call<List<LoaiSp>> getLoaiSp();
+
 }
