@@ -6,11 +6,14 @@
 - Đăng kí, đăng nhập dùng lại giao diện của AppBanHang ( phần logic xử lí thì sử dụng trong Video )
 - Phần eventTinhTien() của GioHangActivity chưa được sử dụng
 - Chưa xong vid 31
+- Vid 30 - 32 cần xem và làm lại
+- GetOrder XemDonActivity chưa xong
+- Vid 34 phần getData chưa xong
 
 - Xử lí Api và Retrofit chưa làm gì cả, code xong hết giao diện các thứ quay lại code phần đó sau ( Vô cùng quan trọng )
 
 
-******* Học về RxAndroid ********
+******* Học về RxAndroid ( 1 ví dụ khác của Retrofit, sử dụng để xử lí Api và Thread ) ********
 
 *** Đối với những dữ liệu sử dụng nhiều trong các Activity, sử dụng 1 lớp riêng để lưu trữ
 *** Build 1 Interface để lưu trữ giá trị dùng trong nhiều Activity

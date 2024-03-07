@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     List<SanPhamMoi> mangSanPhammoi;
     NotificationBadge notificationBadge;
     FrameLayout frameLayout;
+    ImageView search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +69,20 @@ public class MainActivity extends AppCompatActivity {
             ActionviewLipper();
             getLoaiSanPham();
             getEventClick();
+            search();
         }else{
             Toast.makeText(this, "Khong co Internet", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void search() {
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void getEventClick() {
@@ -154,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     private void anhxa(){
         toolbar = findViewById(R.id.Toolbarmanhinhchinh);
         viewFlipper = findViewById(R.id.ViewFlipper);
@@ -165,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         loaiSpAdapter = new LoaiSpAdapter(mangLoaiSp,getApplicationContext());
         listViewmanhinhchinh.setAdapter(loaiSpAdapter);
         mangSanPhammoi = new ArrayList<>();
+        search = findViewById(R.id.search_main);
         notificationBadge = findViewById(R.id.menu_sl_main);
         if (Utils.mangGiohang == null) {
             Utils.mangGiohang = new ArrayList<>();

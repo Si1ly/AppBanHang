@@ -22,13 +22,14 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="#ffffff"
                 app:title="Trang chính">
-
                 <FrameLayout
                     android:id="@+id/frame_main"
                     android:layout_width="60sp"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="right"
-                    android:layout_marginRight="5sp">
+
+                    android:layout_marginRight="5sp"
+                    >
 
                     <com.nex3z.notificationbadge.NotificationBadge
                         android:id="@+id/menu_sl_main"
@@ -40,8 +41,17 @@
                         android:layout_width="40sp"
                         android:layout_height="40sp"
                         android:layout_marginTop="10sp"
-                        android:src="@drawable/cart"></ImageView>
+                        android:src="@drawable/cart"
+                        android:layout_gravity=""></ImageView>
                 </FrameLayout>
+                <ImageView
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:layout_marginTop="10sp"
+                    android:src="@drawable/search"
+                    android:layout_gravity="right"
+                    android:id="@+id/search_main"></ImageView>
+
             </androidx.appcompat.widget.Toolbar>
             <ViewFlipper
                 android:id="@+id/ViewFlipper"
