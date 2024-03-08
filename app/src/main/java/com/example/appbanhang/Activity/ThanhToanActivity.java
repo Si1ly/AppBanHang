@@ -36,8 +36,8 @@ public class ThanhToanActivity extends AppCompatActivity {
 
     private void countItem() {
         total = 0;
-        for(int i=0;i<Utils.mangGiohang.size();i++){
-            total += total + Utils.mangGiohang.get(i).getSl();
+        for(int i=0;i<Utils.mangMuahang.size();i++){
+            total += total + Utils.mangMuahang.get(i).getSl();
         }
     }
 

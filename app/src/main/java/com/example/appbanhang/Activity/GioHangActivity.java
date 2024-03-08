@@ -44,8 +44,8 @@ public class GioHangActivity extends AppCompatActivity {
     }
 
     private void sum() {
-        for(int i=0;i<Utils.mangGiohang.size();i++){
-            sum = sum + (Utils.mangGiohang.get(i).getGiasp()*Utils.mangGiohang.get(i).getSl());
+        for(int i=0;i<Utils.mangMuahang.size();i++){
+            sum = sum + (Utils.mangMuahang.get(i).getGiasp()*Utils.mangMuahang.get(i).getSl());
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         sum_Sp.setText(decimalFormat.format(sum));
@@ -74,6 +74,7 @@ public class GioHangActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),ThanhToanActivity.class);
                 i.putExtra("tongtien",sum);
+                Utils.mangGiohang.clear();
                 startActivity(i);
             }
         });

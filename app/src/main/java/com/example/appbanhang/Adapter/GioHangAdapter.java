@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.media.metrics.Event;
+import android.speech.tts.UtteranceProgressListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -89,10 +92,22 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                         gioHangList.get(pos).setSl(newsl);
                     }
                 }
-//                holder.item_gioHang_sl.setText(gioHangList.get(pos).getSl()+"");
-//                long sum = gioHang.getSl() * gioHang.getGiasp();
-//                holder.item_gioHang_sumgia.setText(decimalFormat.format(sum));
-//                EventBus.getDefault().postSticky(new TinhTongEvent());
+            }
+        });
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    Utils.mangMuahang.add(gioHang);
+                    EventBus.getDefault().postSticky(new TinhTongEvent());
+                }else{
+                    for(int i = 0; i< Utils.mangMuahang.size();i++){
+                        if(Utils.mangMuahang.get(i).getIdsp()== gioHang.getIdsp()){
+                            Utils.mangMuahang.remove(i);
+                            EventBus.getDefault().postSticky(new TinhTongEvent());
+                        }
+                    }
+                }
             }
         });
     }
@@ -106,6 +121,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         ImageView item_gioHang_image,item_Tru,item_Cong;
         TextView item_gioHang_ten, item_gioHang_gia, item_gioHang_sl, item_gioHang_sumgia;
         ImageClickListener imageClickListener;
+        CheckBox checkBox;
 
         public GioHangViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -116,6 +132,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
             item_gioHang_gia = itemView.findViewById(R.id.gioHang_gia);
             item_gioHang_sumgia = itemView.findViewById(R.id.gioHang_tongGia);
             item_gioHang_sl = itemView.findViewById(R.id.gioHang_soluong);
+            checkBox = itemView.findViewById(R.id.cb_gioHang);
 
             item_Cong.setOnClickListener(this);
             item_Tru.setOnClickListener(this);
