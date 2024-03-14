@@ -3,6 +3,7 @@ package com.example.appbanhang.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,13 +19,14 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.example.appbanhang.Adapter.LoaiSpAdapter;
+import com.example.appbanhang.Adapter.SanPhamMoiAdapter;
 import com.example.appbanhang.Model.LoaiSp;
 import com.example.appbanhang.Model.SanPhamMoi;
+import com.example.appbanhang.Model.SanPhamMoiModel;
 import com.example.appbanhang.R;
 import com.example.appbanhang.Retrofit.ApiBanHang;
 import com.example.appbanhang.Retrofit.RetrofitClient;
@@ -35,7 +37,9 @@ import com.nex3z.notificationbadge.NotificationBadge;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.internal.Util;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     NotificationBadge notificationBadge;
     FrameLayout frameLayout;
     ImageView search;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    SanPhamMoiAdapter sanPhamMoiAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,13 +71,11 @@ public class MainActivity extends AppCompatActivity {
         ActionBar();
         ActionviewLipper();
         if(isConnected(this)){
-            Toast.makeText(this, "Ok", Toast.LENGTH_LONG).show();
             ActionviewLipper();
             getLoaiSanPham();
             getEventClick();
             search();
-        }else{
-            Toast.makeText(this, "Khong co Internet", Toast.LENGTH_LONG).show();
+            getSpmoi();
         }
     }
 
@@ -95,14 +99,14 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(trangchu);
                         break;
                     case 1:
-                        Intent dienthoai = new Intent(getApplicationContext(), DienThoaiActivity.class);
-                        dienthoai.putExtra("loai",1);
-                        startActivity(dienthoai);
+                        Intent hoaqua = new Intent(getApplicationContext(), SanPhamActivity.class);
+                        hoaqua.putExtra("loai",1);
+                        startActivity(hoaqua);
                         break;
                     case 2:
-                        Intent laptop = new Intent(getApplicationContext(), DienThoaiActivity.class);
-                        laptop.putExtra("loai",2);
-                        startActivity(laptop);
+                        Intent dokho = new Intent(getApplicationContext(), SanPhamActivity.class);
+                        dokho.putExtra("loai",2);
+                        startActivity(dokho);
                         break;
                 }
             }
@@ -110,18 +114,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getLoaiSanPham() {
-        apiBanHang.getLoaiSp().enqueue(new Callback<List<LoaiSp>>() {
+        compositeDisposable.add(apiBanHang.getLoaiSp()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        loaiSpModel -> {
+                            if(loaiSpModel.isSuccess()){
+                                mangLoaiSp = loaiSpModel.getResult();
+                                loaiSpAdapter = new LoaiSpAdapter(mangLoaiSp,getApplicationContext());
+                                listViewmanhinhchinh.setAdapter(loaiSpAdapter);
+                            }
+                        }
+                ));
+    }
+    private void getSpmoi(){
+        apiBanHang.getSpmoi().enqueue(new Callback<SanPhamMoiModel>() {
             @Override
-            public void onResponse(Call<List<LoaiSp>> call, Response<List<LoaiSp>> response) {
-                if (response.isSuccessful()&&response.body()!=null){
-                    mangLoaiSp = response.body();
-                    loaiSpAdapter = new LoaiSpAdapter(mangLoaiSp,getApplicationContext());
-                    listViewmanhinhchinh.setAdapter(loaiSpAdapter);
-                }
+            public void onResponse(Call<SanPhamMoiModel> call, Response<SanPhamMoiModel> response) {
+                mangSanPhammoi = response.body().getResult();
+                sanPhamMoiAdapter = new SanPhamMoiAdapter(getApplicationContext(),mangSanPhammoi);
+                recyclerViewmanhinhchinh.setAdapter(sanPhamMoiAdapter);
             }
 
             @Override
-            public void onFailure(Call<List<LoaiSp>> call, Throwable t) {
+            public void onFailure(Call<SanPhamMoiModel> call, Throwable t) {
 
             }
         });
@@ -129,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        apiBanHang.getLoaiSp().cancel();
+        compositeDisposable.clear();
         super.onDestroy();
     }
 
@@ -153,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void ActionBar() {
-       setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -165,20 +181,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private void anhxa(){
         toolbar = findViewById(R.id.Toolbarmanhinhchinh);
         viewFlipper = findViewById(R.id.ViewFlipper);
         recyclerViewmanhinhchinh = findViewById(R.id.recyclewview);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerViewmanhinhchinh.setLayoutManager(layoutManager);
+        recyclerViewmanhinhchinh.setHasFixedSize(true);
         navigationView = findViewById(R.id.navigationview);
         listViewmanhinhchinh= findViewById(R.id.listviewanhinhchinh);
         drawerLayout = findViewById(R.id.DrawerLayout);
         mangLoaiSp = new ArrayList<>();
-        loaiSpAdapter = new LoaiSpAdapter(mangLoaiSp,getApplicationContext());
-        listViewmanhinhchinh.setAdapter(loaiSpAdapter);
-        mangSanPhammoi = new ArrayList<>();
+
         search = findViewById(R.id.search_main);
         notificationBadge = findViewById(R.id.menu_sl_main);
         if (Utils.mangGiohang == null) {

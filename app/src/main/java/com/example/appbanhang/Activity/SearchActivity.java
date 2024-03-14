@@ -1,6 +1,7 @@
 package com.example.appbanhang.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,9 +10,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toolbar;
 
-import com.example.appbanhang.Adapter.DienThoaiAdapter;
+import com.example.appbanhang.Adapter.SanPhamAdapter;
 import com.example.appbanhang.Model.SanPhamMoi;
 import com.example.appbanhang.R;
 import com.example.appbanhang.Retrofit.ApiBanHang;
@@ -26,7 +26,7 @@ public class SearchActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     EditText edt_timKiem;
-    DienThoaiAdapter dienThoaiAdapter;
+    SanPhamAdapter sanPhamAdapter;
     List<SanPhamMoi> list;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable;
@@ -58,8 +58,8 @@ public class SearchActivity extends AppCompatActivity {
                 // Phần này hơi ảo
                 if(charSequence.length() == 0){
                     list.clear();
-                    dienThoaiAdapter = new DienThoaiAdapter(getApplicationContext(),list);
-                    recyclerView.setAdapter(dienThoaiAdapter);
+                    sanPhamAdapter = new SanPhamAdapter(getApplicationContext(),list);
+                    recyclerView.setAdapter(sanPhamAdapter);
                 }else{
                     getDataSearch(charSequence.toString());
                 }
@@ -77,6 +77,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     private void actionBar() {
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,39 +3,51 @@ package com.example.appbanhang.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Toolbar;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appbanhang.Adapter.DienThoaiAdapter;
+import com.example.appbanhang.Adapter.SanPhamAdapter;
 import com.example.appbanhang.Model.SanPhamMoi;
 import com.example.appbanhang.R;
+import com.example.appbanhang.Retrofit.ApiBanHang;
+import com.example.appbanhang.Retrofit.RetrofitClient;
+import com.example.appbanhang.Utils.Utils;
 
 import java.util.List;
 
-public class DienThoaiActivity extends AppCompatActivity {
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class SanPhamActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerView;
     int page = 1;
     int loai;
-    DienThoaiAdapter dienThoaiAdapter;
+    SanPhamAdapter sanPhamAdapter;
     List<SanPhamMoi> sanPhamMoiList;
     LinearLayoutManager linearLayoutManager;
     Handler handler = new Handler();
     boolean isLoading = false;
+    ApiBanHang apiBanHang;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dienthoai);
+        setContentView(R.layout.activity_sanpham);
+        apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+
         loai = getIntent().getIntExtra("loai",1);
         link();
         ActionBar();
-        getData(page);
+        getData(page,loai);
         addEventload();
 
     }
@@ -65,23 +77,33 @@ public class DienThoaiActivity extends AppCompatActivity {
             @Override
             public void run() {
                 sanPhamMoiList.add(null);
-                dienThoaiAdapter.notifyItemInserted(sanPhamMoiList.size()-1);
+                sanPhamAdapter.notifyItemInserted(sanPhamMoiList.size()-1);
             }
         });
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 sanPhamMoiList.remove(sanPhamMoiList.size()-1);
-                dienThoaiAdapter.notifyItemRemoved(sanPhamMoiList.size());
+                sanPhamAdapter.notifyItemRemoved(sanPhamMoiList.size());
                 page = page +1;
             }
         },2000);
     }
 
-    private void getData(int page) {
+    private void getData(int page,int loai) {
+        compositeDisposable.add(apiBanHang.getSanPham(page,loai)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        sanPhamMoiModel -> {
+                            sanPhamMoiList = sanPhamMoiModel.getResult();
+                            sanPhamAdapter = new SanPhamAdapter(getApplicationContext(),sanPhamMoiList);
+                            recyclerView.setAdapter(sanPhamAdapter);
+                        }));
     }
 
     private void ActionBar() {
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +113,11 @@ public class DienThoaiActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
+    }
 
     private void link(){
         toolbar = findViewById(R.id.toolbar_dienthoai);

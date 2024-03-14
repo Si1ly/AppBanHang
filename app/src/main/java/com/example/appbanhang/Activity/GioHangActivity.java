@@ -1,6 +1,7 @@
 package com.example.appbanhang.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.appbanhang.Adapter.GioHangAdapter;
 import com.example.appbanhang.Model.EventBus.TinhTongEvent;
@@ -52,6 +52,7 @@ public class GioHangActivity extends AppCompatActivity {
     }
 
     private void initControl() {
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

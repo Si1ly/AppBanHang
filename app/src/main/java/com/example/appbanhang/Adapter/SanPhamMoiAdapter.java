@@ -70,7 +70,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.Sa
             super(itemView);
             tv_gia = itemView.findViewById(R.id.item_sp_gia);
             tv_ten = itemView.findViewById(R.id.item_sp_ten);
-            hinhanh = itemView.findViewById(R.id.item_image);
+            hinhanh = itemView.findViewById(R.id.item_sp_image);
             itemView.setOnClickListener(this);
         }
 

@@ -22,6 +22,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.greenrobot.eventbus.ThreadMode;
+import org.greenrobot.eventbus.android.AndroidLogger;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class DangKiActivity extends AppCompatActivity {
     EditText userName, userEmail, userPass,userSdt;
     ImageView seeView;
@@ -30,7 +38,7 @@ public class DangKiActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     String email,pass;
     ApiBanHang apiBanHang;
-
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +65,23 @@ public class DangKiActivity extends AppCompatActivity {
     }
 
     private void dangKiwithServer() {
-        email = userEmail.getText().toString().trim();
-        pass = userPass.getText().toString().trim();
-        String phone = userSdt.getText().toString();
-        String name = userName.getText().toString().trim();
+//        email = userEmail.getText().toString().trim();
+//        pass = userPass.getText().toString().trim();
+//        String phone = userSdt.getText().toString();
+//        String name = userName.getText().toString().trim();
+//        compositeDisposable.add(apiBanHang.dangKi()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        user ->
+//                )
+
+
     }
 
     private void dangKiwithFirebase() {
         email = userEmail.getText().toString().trim();
         pass = userPass.getText().toString().trim();
-        //Phần này phải đưa vào trong API thì sẽ hợp lí
         firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(task -> {
            if(task.isSuccessful()){
                Toast.makeText(this, "Thành công", Toast.LENGTH_SHORT).show();

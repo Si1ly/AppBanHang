@@ -46,7 +46,7 @@ public class DangNhapActivity extends AppCompatActivity {
         button.setOnClickListener(task1->{
             String email = edt_email_login.getText().toString().trim();
             String pass = edt_pass_login.getText().toString().trim();
-            //Api cho phần Server
+            //Api cho phần Serve
             
             firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override

@@ -3,16 +3,17 @@ package com.example.appbanhang.Model;
 import java.util.List;
 
 public class LoaiSpModel {
-    boolean succeed;
+    boolean success;
     String message;
     List<LoaiSp> result;
 
-    public boolean isSucceed() {
-        return succeed;
+
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setSucceed(boolean succeed) {
-        this.succeed = succeed;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public String getMessage() {

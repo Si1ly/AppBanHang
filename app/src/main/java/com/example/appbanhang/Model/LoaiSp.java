@@ -5,6 +5,12 @@ public class LoaiSp {
     String tensanpham;
     String hinhanh;
 
+    public LoaiSp(int id, String tensanpham, String hinhanh) {
+        this.id = id;
+        this.tensanpham = tensanpham;
+        this.hinhanh = hinhanh;
+    }
+
     public int getId() {
         return id;
     }

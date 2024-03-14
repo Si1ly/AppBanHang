@@ -21,14 +21,14 @@ import com.example.appbanhang.R;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class DienThoaiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SanPhamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_TYPE_DATA = 0;
     private static final int VIEW_TYPE_LOADING = 1;
     Context context;
     List<SanPhamMoi> array;
 
-    public DienThoaiAdapter(Context context, List<SanPhamMoi> array) {
+    public SanPhamAdapter(Context context, List<SanPhamMoi> array) {
         this.context = context;
         this.array = array;
     }
@@ -52,7 +52,7 @@ public class DienThoaiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             SanPhamMoi sanPhamMoi = array.get(position);
             dienThoaiViewHolder.ten.setText(sanPhamMoi.getTensp());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            dienThoaiViewHolder.gia.setText("price" + decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp())));
+            dienThoaiViewHolder.gia.setText("Price" + decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp())));
             dienThoaiViewHolder.mota.setText(sanPhamMoi.getMota());
             Glide.with(context).load(sanPhamMoi.getHinhanh()).into(dienThoaiViewHolder.hinhanh);
             dienThoaiViewHolder.setItemClickListener(new ItemClickListener() {
