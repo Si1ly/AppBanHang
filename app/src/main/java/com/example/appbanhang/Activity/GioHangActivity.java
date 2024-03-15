@@ -32,7 +32,6 @@ public class GioHangActivity extends AppCompatActivity {
     Button buy;
     GioHangAdapter gioHangAdapter;
     long sum = 0;
-//    List<GioHang> gioHangList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class GioHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gio_hang);
         initView();
         initControl();
-        sum();
+//        sum();
     }
 
     private void sum() {

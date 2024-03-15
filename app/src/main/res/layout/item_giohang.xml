@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/gioHang_tensp"
                 android:text="Name"
+                android:layout_marginLeft="10sp"
                 android:textSize="18sp"
                 android:textStyle="bold"></TextView>
 
@@ -41,7 +42,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="100sp"
                     android:text="20000"
-                    android:textSize="18sp"></TextView>
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10sp"></TextView>
 
                 <ImageView
                     android:id="@+id/gioHang_tru"
@@ -67,7 +69,7 @@
 
                 <CheckBox
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48sp"
                     android:id="@+id/cb_gioHang"
                     ></CheckBox>
 
@@ -79,7 +81,9 @@
                 android:gravity="right"
                 android:id="@+id/gioHang_tongGia"
                 android:textSize="22sp"
-                android:text="40000"></TextView>
+                android:text="40000"
+                android:textStyle="bold"
+                android:layout_marginLeft="10sp"></TextView>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

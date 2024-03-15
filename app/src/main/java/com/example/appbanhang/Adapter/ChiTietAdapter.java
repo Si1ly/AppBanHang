@@ -35,7 +35,7 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.ChiTietV
     @Override
     public void onBindViewHolder(@NonNull ChiTietViewHolder holder, int position) {
         Item item = itemList.get(position);
-        holder.ten.setText(item.getTensp()+"");
+        holder.ten.setText(item.getTensp());
         holder.sl.setText(item.getSluong()+"");
         Glide.with(context).load(item.getHinhAnh()).into(holder.imageView);
     }

@@ -21,7 +21,6 @@ import com.example.appbanhang.Utils.Utils;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.text.DecimalFormat;
-import java.util.function.ToLongBiFunction;
 
 public class ChiTietActivity extends AppCompatActivity {
     TextView ten, gia, mota;
@@ -52,18 +51,21 @@ public class ChiTietActivity extends AppCompatActivity {
         });
     }
 
+    //Ham nay hay vcl
     private void themGioHang() {
         if (Utils.mangGiohang.size() > 0) {
             boolean flag = false;
             int sl = Integer.parseInt(spinner.getSelectedItem().toString());
             for (int i = 0; i < Utils.mangGiohang.size(); i++) {
+                //done
                 if (Utils.mangGiohang.get(i).getIdsp() == sanPhamMoi.getId()) {
                     Utils.mangGiohang.get(i).setSl(sl + Utils.mangGiohang.get(i).getSl());
                     long gia = Long.parseLong(sanPhamMoi.getGiasp()) * Utils.mangGiohang.get(i).getSl();
                     Utils.mangGiohang.get(i).setGiasp(gia);
                     flag = true;
                 }
-                if (flag = true) {
+                if (flag == false) {
+                    //done
                     long gia = Long.parseLong(sanPhamMoi.getGiasp()) * sl;
                     GioHang gioHang = new GioHang();
                     gioHang.setGiasp(gia);
@@ -75,6 +77,7 @@ public class ChiTietActivity extends AppCompatActivity {
                 }
             }
         } else {
+            //done
             int sl = Integer.parseInt(spinner.getSelectedItem().toString());
             long gia = Long.parseLong(sanPhamMoi.getGiasp()) * sl;
             GioHang gioHang = new GioHang();
@@ -87,7 +90,7 @@ public class ChiTietActivity extends AppCompatActivity {
         }
         int total = 0;
         for(int i=0;i<Utils.mangGiohang.size();i++){
-            total += total + Utils.mangGiohang.get(i).getSl();
+            total += Utils.mangGiohang.get(i).getSl();
         }
         notificationBadge.setText(String.valueOf(total));
     }
@@ -96,12 +99,13 @@ public class ChiTietActivity extends AppCompatActivity {
         sanPhamMoi = (SanPhamMoi) getIntent().getSerializableExtra("chitiet");
         ten.setText(sanPhamMoi.getTensp());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        gia.setText("Price: " + decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp()) + "Đ"));
+        gia.setText("Price: " + decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp())));
         mota.setText(sanPhamMoi.getMota());
         Glide.with(getApplicationContext()).load(sanPhamMoi.getHinhanh()).into(anh);
         Integer[] so = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,so);
         spinner.setAdapter(adapter);
+
     }
 
     private void initView() {
@@ -122,11 +126,7 @@ public class ChiTietActivity extends AppCompatActivity {
             }
         });
         if (Utils.mangGiohang != null) {
-            int total = 0;
-            for(int i=0;i<Utils.mangGiohang.size();i++){
-                total += total + Utils.mangGiohang.get(i).getSl();
-            }
-            notificationBadge.setText(String.valueOf(total));
+            notificationBadge.setText(String.valueOf(Utils.mangGiohang.size()));
         }
     }
 
@@ -147,7 +147,7 @@ public class ChiTietActivity extends AppCompatActivity {
         if (Utils.mangGiohang != null) {
             int total = 0;
             for(int i=0;i<Utils.mangGiohang.size();i++){
-                total += total + Utils.mangGiohang.get(i).getSl();
+                total += Utils.mangGiohang.get(i).getSl();
             }
             notificationBadge.setText(String.valueOf(total));
         }

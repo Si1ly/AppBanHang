@@ -198,11 +198,11 @@ public class MainActivity extends AppCompatActivity {
         if (Utils.mangGiohang == null) {
             Utils.mangGiohang = new ArrayList<>();
         }else{
-            int total = 0;
-            for(int i=0;i<Utils.mangGiohang.size();i++){
-                total += total + Utils.mangGiohang.get(i).getSl();
-            }
-            notificationBadge.setText(String.valueOf(total));
+//            int total = 0;
+//            for(int i=0;i<Utils.mangGiohang.size();i++){
+//                total += total + Utils.mangGiohang.get(i).getSl();
+//            }
+//            notificationBadge.setText(String.valueOf(total));
         }
         frameLayout = findViewById(R.id.frame_main);
         frameLayout.setOnClickListener(new View.OnClickListener() {
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         int total = 0;
         for(int i=0;i<Utils.mangGiohang.size();i++){
-            total += total + Utils.mangGiohang.get(i).getSl();
+            total += Utils.mangGiohang.get(i).getSl();
         }
         notificationBadge.setText(String.valueOf(total));
     }

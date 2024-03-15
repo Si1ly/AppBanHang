@@ -41,14 +41,14 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
     @NonNull
     @Override
     public GioHangViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_giohang, parent);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_giohang, parent,false);
         return new GioHangViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull GioHangViewHolder holder, int position) {
         GioHang gioHang = gioHangList.get(position);
-        holder.item_gioHang_sl.setText(gioHang.getSl()+"");
+        holder.item_gioHang_sl.setText(String.valueOf(gioHang.getSl()));
         holder.item_gioHang_ten.setText(gioHang.getTensp());
         Glide.with(context).load(gioHang.getHinhsp()).into(holder.item_gioHang_image);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
