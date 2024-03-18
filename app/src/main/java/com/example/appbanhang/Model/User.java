@@ -7,6 +7,14 @@ public class User {
     String userName;
     String mobile;
 
+    public User(String email, String pass) {
+        this.email = email;
+        this.pass = pass;
+    }
+
+    public User() {
+    }
+
     public int getId() {
         return id;
     }

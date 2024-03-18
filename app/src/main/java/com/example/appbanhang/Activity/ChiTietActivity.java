@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,36 +54,39 @@ public class ChiTietActivity extends AppCompatActivity {
 
     //Ham nay hay vcl
     private void themGioHang() {
+
         if (Utils.mangGiohang.size() > 0) {
-            boolean flag = false;
             int sl = Integer.parseInt(spinner.getSelectedItem().toString());
+            boolean flag = false;
             for (int i = 0; i < Utils.mangGiohang.size(); i++) {
                 //done
                 if (Utils.mangGiohang.get(i).getIdsp() == sanPhamMoi.getId()) {
                     Utils.mangGiohang.get(i).setSl(sl + Utils.mangGiohang.get(i).getSl());
-                    long gia = Long.parseLong(sanPhamMoi.getGiasp()) * Utils.mangGiohang.get(i).getSl();
+                    long gia = Long.parseLong(sanPhamMoi.getGiasp());
                     Utils.mangGiohang.get(i).setGiasp(gia);
                     flag = true;
                 }
-                if (flag == false) {
-                    //done
-                    long gia = Long.parseLong(sanPhamMoi.getGiasp()) * sl;
-                    GioHang gioHang = new GioHang();
-                    gioHang.setGiasp(gia);
-                    gioHang.setSl(sl);
-                    gioHang.setIdsp(sanPhamMoi.getId());
-                    gioHang.setTensp(sanPhamMoi.getTensp());
-                    gioHang.setHinhsp(sanPhamMoi.getHinhanh());
-                    Utils.mangGiohang.add(gioHang);
-                }
             }
+            if (flag == false) {
+                //done
+                long gia = Long.parseLong(sanPhamMoi.getGiasp());
+                GioHang gioHang = new GioHang();
+                gioHang.setGiasp(gia);
+                gioHang.setSl(sl);
+                gioHang.setIdsp(sanPhamMoi.getId());
+                gioHang.setTensp(sanPhamMoi.getTensp());
+                gioHang.setHinhsp(sanPhamMoi.getHinhanh());
+                Utils.mangGiohang.add(gioHang);
+            }
+
+
         } else {
             //done
-            int sl = Integer.parseInt(spinner.getSelectedItem().toString());
-            long gia = Long.parseLong(sanPhamMoi.getGiasp()) * sl;
+            int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+            long gia = Long.parseLong(sanPhamMoi.getGiasp());
             GioHang gioHang = new GioHang();
             gioHang.setGiasp(gia);
-            gioHang.setSl(sl);
+            gioHang.setSl(soluong);
             gioHang.setIdsp(sanPhamMoi.getId());
             gioHang.setTensp(sanPhamMoi.getTensp());
             gioHang.setHinhsp(sanPhamMoi.getHinhanh());

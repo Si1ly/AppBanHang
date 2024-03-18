@@ -58,7 +58,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         holder.setImageClickListener(new ImageClickListener() {
             @Override
             public void onImageClick(View view, int pos, int giatri) {
-                if (giatri == 1) {
+                if (giatri == 2) {
                     if(gioHangList.get(pos).getSl()>1){
                         int newsl = gioHangList.get(pos).getSl() - 1;
                         gioHangList.get(pos).setSl(newsl);
@@ -86,10 +86,11 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                         });
 
                     }
-                } else if (giatri == 2) {
+                } else if (giatri == 1) {
                     if(gioHangList.get(pos).getSl()<11){
                         int newsl = gioHangList.get(pos).getSl() + 1;
                         gioHangList.get(pos).setSl(newsl);
+                        notifyDataSetChanged();
                     }
                 }
             }
@@ -97,12 +98,12 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+                if(b==true){
                     Utils.mangMuahang.add(gioHang);
                     EventBus.getDefault().postSticky(new TinhTongEvent());
                 }else{
                     for(int i = 0; i< Utils.mangMuahang.size();i++){
-                        if(Utils.mangMuahang.get(i).getIdsp()== gioHang.getIdsp()){
+                        if(Utils.mangMuahang.get(i).getIdsp() == gioHang.getIdsp()){
                             Utils.mangMuahang.remove(i);
                             EventBus.getDefault().postSticky(new TinhTongEvent());
                         }

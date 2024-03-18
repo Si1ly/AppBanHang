@@ -39,10 +39,11 @@ public class GioHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gio_hang);
         initView();
         initControl();
-//        sum();
+        tinhTongTien();
     }
 
-    private void sum() {
+    private void tinhTongTien() {
+        sum = 0;
         for(int i=0;i<Utils.mangMuahang.size();i++){
             sum = sum + (Utils.mangMuahang.get(i).getGiasp()*Utils.mangMuahang.get(i).getSl());
         }
@@ -63,7 +64,7 @@ public class GioHangActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerViewGioHang.setLayoutManager(layoutManager);
 
-        if (Utils.mangGiohang.isEmpty() == true) {
+        if (Utils.mangGiohang.isEmpty()) {
             gioHangTrong.setVisibility(View.VISIBLE);
         }else{
             gioHangAdapter = new GioHangAdapter(getApplicationContext(),Utils.mangGiohang);
@@ -82,7 +83,7 @@ public class GioHangActivity extends AppCompatActivity {
 
     private void initView() {
         gioHangTrong = findViewById(R.id.gioHang_tvTrong);
-        sum_Sp = findViewById(R.id.gioHang_tongGia);
+        sum_Sp = findViewById(R.id.tv_TongTien);
         toolbar = findViewById(R.id.toolbar_GioHang);
         recyclerViewGioHang = findViewById(R.id.recycleView_gioHang);
         buy = findViewById(R.id.gioHang_MuaHang);
@@ -103,7 +104,7 @@ public class GioHangActivity extends AppCompatActivity {
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void eventTinhTien(TinhTongEvent event){
         if(event != null){
-            sum();
+            tinhTongTien();
         }
     }
 

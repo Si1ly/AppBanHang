@@ -31,9 +31,14 @@ public interface ApiBanHang {
     );
 
 
-    @POST("dangki.php")
+    @POST("dangky.php")
     @FormUrlEncoded
-    Observable<User> dangKi();
+    Observable<UserModel> dangky(
+            @Field("email") String email,
+            @Field("pass") String pass,
+            @Field("username") String username,
+            @Field("mobile") String mobile
+    );
 
     @POST("dangnhap.php")
     @FormUrlEncoded
@@ -42,4 +47,21 @@ public interface ApiBanHang {
             @Field("pass") String pass
     );
 
+    @POST("reset.php")
+    @FormUrlEncoded
+    Observable<UserModel> resetPass(
+            @Field("email") String email
+    );
+
+    @POST("donhang.php")
+    @FormUrlEncoded
+    Observable<UserModel> createOrder(
+            @Field("email") String email,
+            @Field("sodienthoai") String sodienthoai,
+            @Field("tongtien") String tongtien,
+            @Field("iduser") long iduser,
+            @Field("diachi") String diachi,
+            @Field("soluong") int soluong,
+            @Field("chitiet") String chitiet
+    );
 }

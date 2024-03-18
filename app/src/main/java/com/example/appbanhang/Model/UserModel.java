@@ -1,11 +1,18 @@
 package com.example.appbanhang.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserModel {
     boolean success;
     String message;
-    List<User> list;
+    List<User> result ;
+
+    public UserModel(boolean success, String message, List<User> result) {
+        this.success = success;
+        this.message = message;
+        this.result = result;
+    }
 
     public boolean isSuccess() {
         return success;
@@ -24,10 +31,10 @@ public class UserModel {
     }
 
     public List<User> getList() {
-        return list;
+        return result;
     }
 
     public void setList(List<User> list) {
-        this.list = list;
+        this.result = list;
     }
 }
