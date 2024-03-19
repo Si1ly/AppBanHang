@@ -49,8 +49,8 @@ public class DangKiActivity extends AppCompatActivity {
         dangKi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dangKiwithServer();
-//                dangKiwithFirebase();
+//                dangKiwithServer();
+                dangKiwithFirebase();
             }
         });
 
@@ -123,7 +123,7 @@ public class DangKiActivity extends AppCompatActivity {
                Intent i = new Intent(DangKiActivity.this,DangNhapActivity.class);
                startActivity(i);
            }else{
-               Toast.makeText(this, "Kiểm tra lại thông tin", Toast.LENGTH_SHORT).show();
+               Log.d("SADASDAS", task.getException().toString());
            }
         });
     }
