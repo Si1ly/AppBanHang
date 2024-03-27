@@ -37,8 +37,8 @@ public class SanPhamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_DATA) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dienthoai, parent, false);
-            return new DienThoaiViewHolder(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sp, parent, false);
+            return new SanPhamViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);
             return new LoadingViewHolder(view);
@@ -47,13 +47,13 @@ public class SanPhamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof DienThoaiViewHolder) {
-            DienThoaiViewHolder dienThoaiViewHolder = (DienThoaiViewHolder) holder;
+        if (holder instanceof SanPhamViewHolder) {
+            SanPhamViewHolder dienThoaiViewHolder = (SanPhamViewHolder) holder;
             SanPhamMoi sanPhamMoi = array.get(position);
             dienThoaiViewHolder.ten.setText(sanPhamMoi.getTensp());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
             dienThoaiViewHolder.gia.setText("Price" + decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp())));
-            dienThoaiViewHolder.mota.setText(sanPhamMoi.getMota());
+//            dienThoaiViewHolder.mota.setText(sanPhamMoi.getMota());
             Glide.with(context).load(sanPhamMoi.getHinhanh()).into(dienThoaiViewHolder.hinhanh);
             dienThoaiViewHolder.setItemClickListener(new ItemClickListener() {
                 @Override
@@ -91,17 +91,17 @@ public class SanPhamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public class DienThoaiViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class SanPhamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView ten, gia, mota;
+        TextView ten, gia;
         ImageView hinhanh;
         private ItemClickListener itemClickListener;
 
-        public DienThoaiViewHolder(@NonNull View itemView) {
+        public SanPhamViewHolder(@NonNull View itemView) {
             super(itemView);
             ten = itemView.findViewById(R.id.name_dt);
             gia = itemView.findViewById(R.id.gia_dt);
-            mota = itemView.findViewById(R.id.mota_dt);
+//            mota = itemView.findViewById(R.id.mota_dt);
             hinhanh = itemView.findViewById(R.id.anh_dt);
             itemView.setOnClickListener(this);
         }

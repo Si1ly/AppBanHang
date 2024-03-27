@@ -36,8 +36,8 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.ChiTietV
     public void onBindViewHolder(@NonNull ChiTietViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.ten.setText(item.getTensp());
-        holder.sl.setText(item.getSluong()+"");
-        Glide.with(context).load(item.getHinhAnh()).into(holder.imageView);
+        holder.sl.setText("Số lượng " + item.getSoluong()+"");
+        Glide.with(context).load(item.getHinhanh()).into(holder.imageView);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.ChiTietV
 
         public ChiTietViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imgchitiet);
+            imageView = itemView.findViewById(R.id.item_imgchitiet);
             ten = itemView.findViewById(R.id.tenSp_chitiet);
             sl = itemView.findViewById(R.id.sl_chitiet);
         }

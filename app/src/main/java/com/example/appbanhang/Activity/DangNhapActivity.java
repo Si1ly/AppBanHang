@@ -65,6 +65,14 @@ public class DangNhapActivity extends AppCompatActivity {
             loginServer(email,pass);
             loginFirebase(email,pass);
         });
+
+        resetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent reset = new Intent(getApplicationContext(), ResetPassActivity.class);
+                startActivity(reset);
+            }
+        });
     }
 
     private void loginServer(String email, String pass) {
@@ -85,6 +93,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                     isLogin = true;
                                     Paper.book().write("isLogin",isLogin);
                                     Utils.currentUser = userModel.getList().get(0);
+                                    Paper.book().write("user",userModel.getList().get(0));
                                     Intent intent= new Intent(getApplicationContext(),MainActivity.class);
                                     startActivity(intent);
                                 }
@@ -96,11 +105,34 @@ public class DangNhapActivity extends AppCompatActivity {
     }
 
     private void loginFirebase(String email, String pass){
+
+        if (TextUtils.isEmpty(email)){
+            Toast.makeText(getApplicationContext(), "Bạn chưa nhập email", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(pass)){
+            Toast.makeText(getApplicationContext(), "Bạn chưa nhập mật khẩu", Toast.LENGTH_SHORT).show();
+        }else {
+            firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        Paper.book().write("email", email);
+                        Paper.book().write("pass", pass);
+                    }
+                }
+            });
+        }
+    }
+
+    private void login(String email, String pass){
         firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+
+
                 }
             }
         });
@@ -124,7 +156,8 @@ public class DangNhapActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            loginServer(Paper.book().read("email"),Paper.book().read("pass"));
+//                            Paper.book().write("isLogin",false);
+//                            loginServer(Paper.book().read("email"),Paper.book().read("pass"));
                         }
                     },1000);
                 }
@@ -144,7 +177,6 @@ public class DangNhapActivity extends AppCompatActivity {
         if (Utils.currentUser.getEmail() !=null && Utils.currentUser.getPass() !=null){
             edt_email_login.setText(Utils.currentUser.getEmail());
             edt_pass_login.setText(Utils.currentUser.getPass());
-            Log.d("GFasdasdasdas", "dangKiwithServer: "+Utils.currentUser.toString());
         }
     }
 }

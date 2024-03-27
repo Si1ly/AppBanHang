@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -16,6 +17,7 @@ import com.example.appbanhang.R;
 import com.example.appbanhang.Retrofit.ApiBanHang;
 import com.example.appbanhang.Retrofit.RetrofitClient;
 import com.example.appbanhang.Utils.Utils;
+import com.google.firebase.auth.FirebaseAuth;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -28,6 +30,7 @@ public class ResetPassActivity extends AppCompatActivity {
 
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable =new CompositeDisposable();
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public class ResetPassActivity extends AppCompatActivity {
 
                                     },
                                     throwable -> {
-                                        Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.d("21312azca", throwable.getMessage());
                                         progressBar.setVisibility(View.INVISIBLE);
                                     }
                             ));
@@ -75,6 +78,7 @@ public class ResetPassActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        firebaseAuth = FirebaseAuth.getInstance();
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         edtreset = findViewById(R.id.edtreset);
         btnreset = findViewById(R.id.btnreset);

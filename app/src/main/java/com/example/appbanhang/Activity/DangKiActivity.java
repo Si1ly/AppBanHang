@@ -49,7 +49,7 @@ public class DangKiActivity extends AppCompatActivity {
         dangKi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                dangKiwithServer();
+                dangKiwithServer();
                 dangKiwithFirebase();
             }
         });

@@ -27,6 +27,7 @@ import com.example.appbanhang.Adapter.SanPhamMoiAdapter;
 import com.example.appbanhang.Model.LoaiSp;
 import com.example.appbanhang.Model.SanPhamMoi;
 import com.example.appbanhang.Model.SanPhamMoiModel;
+import com.example.appbanhang.Model.User;
 import com.example.appbanhang.R;
 import com.example.appbanhang.Retrofit.ApiBanHang;
 import com.example.appbanhang.Retrofit.RetrofitClient;
@@ -37,6 +38,7 @@ import com.nex3z.notificationbadge.NotificationBadge;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -67,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        Paper.init(this);
+        if(Paper.book().read("user")!=null){
+            User user = Paper.book().read("user");
+            Utils.currentUser = user;
+        }
         anhxa();
         ActionBar();
         ActionviewLipper();
@@ -107,6 +114,15 @@ public class MainActivity extends AppCompatActivity {
                         Intent dokho = new Intent(getApplicationContext(), SanPhamActivity.class);
                         dokho.putExtra("loai",2);
                         startActivity(dokho);
+                        break;
+                    case 4:
+                        Intent xemdon = new Intent(getApplicationContext(), XemDonActivity.class);
+                        startActivity(xemdon);
+                        break;
+                    case 5:
+                        Paper.book().delete("user");
+                        Intent dangnhap = new Intent(getApplicationContext(),DangNhapActivity.class);
+                        startActivity(dangnhap);
                         break;
                 }
             }
@@ -185,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.Toolbarmanhinhchinh);
         viewFlipper = findViewById(R.id.ViewFlipper);
         recyclerViewmanhinhchinh = findViewById(R.id.recyclewview);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,3);
         recyclerViewmanhinhchinh.setLayoutManager(layoutManager);
         recyclerViewmanhinhchinh.setHasFixedSize(true);
         navigationView = findViewById(R.id.navigationview);

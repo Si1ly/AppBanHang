@@ -66,7 +66,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         });
 
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        sum = getIntent().getLongExtra("tongtien",0);
+        sum = getIntent().getLongExtra("tongtien", 0);
 
         tongTien.setText(decimalFormat.format(sum));
         email.setText(Utils.currentUser.getEmail());
@@ -75,25 +75,25 @@ public class ThanhToanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String diachi = diaChi.getText().toString().trim();
-                if(TextUtils.isEmpty(diachi)){
+                if (TextUtils.isEmpty(diachi)) {
                     Toast.makeText(ThanhToanActivity.this, "Bạn chưa nhập địa chỉ", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     String email = Utils.currentUser.getEmail();
                     String sdt = Utils.currentUser.getMobile();
                     int id = Utils.currentUser.getId();
-                    Log.d("asdsadsa", new Gson().toJson(Utils.mangMuahang));
-                    compositeDisposable.add(apiBanHang.createOrder(email,sdt,String.valueOf(sum),id,diachi,total,new Gson().toJson(Utils.mangMuahang))
+                    compositeDisposable.add(apiBanHang.createOrder(email, sdt, String.valueOf(sum), id, diachi, total, new Gson().toJson(Utils.mangMuahang))
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(
                                     userModel -> {
-//                                        Toast.makeText(getApplicationContext(), "Thanh Cong", Toast.LENGTH_SHORT).show();
-//                                        Intent i = new Intent(getApplicationContext(),MainActivity.class);
-//                                        startActivity(i);
-//                                        finish();
+                                        Log.d("asdasdawqe", email+sdt+sum+id+diachi+total+new Gson().toJson(Utils.mangMuahang));
+                                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(i);
+                                        finish();
                                     }
-                            ));
 
+
+                            ));
                 }
             }
         });

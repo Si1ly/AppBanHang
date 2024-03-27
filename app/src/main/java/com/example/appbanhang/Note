@@ -1,17 +1,9 @@
-- Video 8 + 12 chưa upload dữ liệu lên được ( mới chỉ xong phần code, còn phần API chưa lấy được dữ liệu )
-- Chưa có link ảnh và link sản phẩm
-- Chưa code được hàm getData() trong DienThoaiActivity
-- Phần lấy dữ liệu từ database chưa xử lí được trong Vid 13
-- getData trong DienThoaiAcitivity cần xử lí để lấy dữ liệu trong database theo từng loại
-- Đăng kí, đăng nhập dùng lại giao diện của AppBanHang ( phần logic xử lí thì sử dụng trong Video )
-- Phần eventTinhTien() của GioHangActivity chưa được sử dụng, xem lại EventBus( TinhTongEvent )
-- Chưa xong vid 31
-- Vid 30 - 32 cần xem và làm lại
-- GetOrder XemDonActivity chưa xong
-- Vid 34 phần getData chưa xong
+
 - Vid 36 liên quan đến đăng nhập và đăng xuất nên chưa làm ( Cần làm sau )
+- Cần xem lại và làm lại phần resetpass
 
 - Xử lí Api và Retrofit chưa làm gì cả, code xong hết giao diện các thứ quay lại code phần đó sau ( Vô cùng quan trọng )
+- Chưa config SplashActivity, cần quay lại check sau
 
 
 ******* Học về RxAndroid ( 1 ví dụ khác của Retrofit, sử dụng để xử lí Api và Thread ) ********

@@ -16,9 +16,15 @@ import com.example.appbanhang.R;
 import java.util.List;
 
 public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangViewHolder> {
+    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
 
     Context context;
     List<DonHang> list;
+
+    public DonHangAdapter(Context context, List<DonHang> list) {
+        this.context = context;
+        this.list = list;
+    }
 
     @NonNull
     @Override
@@ -33,11 +39,11 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
         holder.tv_donHang.setText("Đơn hàng" + donHang.getId()+"");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
         holder.recyclerView_chitiet.getContext(),LinearLayoutManager.VERTICAL,false);
-        linearLayoutManager.setInitialPrefetchItemCount(donHang.getItemList().size());
-        ChiTietAdapter chiTietAdapter = new ChiTietAdapter(donHang.getItemList(),context);
+        linearLayoutManager.setInitialPrefetchItemCount(donHang.getItem().size());
+        ChiTietAdapter chiTietAdapter = new ChiTietAdapter(donHang.getItem(),context);
         holder.recyclerView_chitiet.setLayoutManager(linearLayoutManager);
         holder.recyclerView_chitiet.setAdapter(chiTietAdapter);
-        holder.recyclerView_chitiet.setRecycledViewPool(new RecyclerView.RecycledViewPool());
+        holder.recyclerView_chitiet.setRecycledViewPool(viewPool);
     }
 
     @Override

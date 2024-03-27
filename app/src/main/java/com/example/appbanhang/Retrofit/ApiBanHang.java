@@ -1,5 +1,6 @@
 package com.example.appbanhang.Retrofit;
 
+import com.example.appbanhang.Model.DonHangModel;
 import com.example.appbanhang.Model.LoaiSp;
 
 import com.example.appbanhang.Model.LoaiSpModel;
@@ -59,9 +60,15 @@ public interface ApiBanHang {
             @Field("email") String email,
             @Field("sodienthoai") String sodienthoai,
             @Field("tongtien") String tongtien,
-            @Field("iduser") long iduser,
+            @Field("iduser") int iduser,
             @Field("diachi") String diachi,
             @Field("soluong") int soluong,
             @Field("chitiet") String chitiet
+    );
+
+    @POST("xemdonhang.php")
+    @FormUrlEncoded
+    Observable<DonHangModel> xemDonHang(
+        @Field("iduser") int iduser
     );
 }

@@ -3,24 +3,8 @@ package com.example.appbanhang.Model;
 public class Item {
     int id;
     String tensp;
-    int sluong;
-    String hinhAnh;
-
-    public int getSluong() {
-        return sluong;
-    }
-
-    public void setSluong(int sluong) {
-        this.sluong = sluong;
-    }
-
-    public String getHinhAnh() {
-        return hinhAnh;
-    }
-
-    public void setHinhAnh(String hinhAnh) {
-        this.hinhAnh = hinhAnh;
-    }
+    String hinhanh;
+    int soluong;
 
     public int getId() {
         return id;
@@ -36,5 +20,21 @@ public class Item {
 
     public void setTensp(String tensp) {
         this.tensp = tensp;
+    }
+
+    public String getHinhanh() {
+        return hinhanh;
+    }
+
+    public void setHinhanh(String hinhanh) {
+        this.hinhanh = hinhanh;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
     }
 }

@@ -4,11 +4,11 @@ import java.util.List;
 
 public class DonHang {
     int id;
-    int idUser;
-    String diaChi;
-    String soDienthoai;
-    String tongTien;
-    List<Item> itemList;
+    int iduser;
+    String diachi;
+    String sodienthoai;
+    String tongtien;
+    List<Item> item;
 
     public int getId() {
         return id;
@@ -18,43 +18,43 @@ public class DonHang {
         this.id = id;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getIduser() {
+        return iduser;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setIduser(int iduser) {
+        this.iduser = iduser;
     }
 
-    public String getDiaChi() {
-        return diaChi;
+    public String getDiachi() {
+        return diachi;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public void setDiachi(String diachi) {
+        this.diachi = diachi;
     }
 
-    public String getSoDienthoai() {
-        return soDienthoai;
+    public String getSodienthoai() {
+        return sodienthoai;
     }
 
-    public void setSoDienthoai(String soDienthoai) {
-        this.soDienthoai = soDienthoai;
+    public void setSodienthoai(String sodienthoai) {
+        this.sodienthoai = sodienthoai;
     }
 
-    public String getTongTien() {
-        return tongTien;
+    public String getTongtien() {
+        return tongtien;
     }
 
-    public void setTongTien(String tongTien) {
-        this.tongTien = tongTien;
+    public void setTongtien(String tongtien) {
+        this.tongtien = tongtien;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
+    public List<Item> getItem() {
+        return item;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
+    public void setItem(List<Item> item) {
+        this.item = item;
     }
 }
