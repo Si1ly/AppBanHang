@@ -20,7 +20,7 @@
                 android:id="@+id/Toolbarmanhinhchinh"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#ffffff"
+                android:background="@color/teal_200"
                 app:title="Trang chính">
                 <FrameLayout
                     android:id="@+id/frame_main"
@@ -30,7 +30,6 @@
 
                     android:layout_marginRight="5sp"
                     >
-
                     <com.nex3z.notificationbadge.NotificationBadge
                         android:id="@+id/menu_sl_main"
                         android:layout_width="25sp"

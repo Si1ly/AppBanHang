@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.appbanhang.Adapter.SanPhamAdapter;
 import com.example.appbanhang.Model.SanPhamMoi;
@@ -18,9 +19,12 @@ import com.example.appbanhang.Retrofit.ApiBanHang;
 import com.example.appbanhang.Retrofit.RetrofitClient;
 import com.example.appbanhang.Utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -29,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
     SanPhamAdapter sanPhamAdapter;
     List<SanPhamMoi> list;
     ApiBanHang apiBanHang;
-    CompositeDisposable compositeDisposable;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void initView() {
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        list = new ArrayList<>();
         toolbar = findViewById(R.id.toolbar_timKiem);
         recyclerView = findViewById(R.id.recycleView_timKiem);
         edt_timKiem = findViewById(R.id.edt_timKiem);
@@ -72,7 +77,22 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void getDataSearch(String temp) {
-
+        list.clear();
+        compositeDisposable.add(apiBanHang.search(temp)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        SanPhamMoiModel->{
+                            if (SanPhamMoiModel.isSuccess()){
+                                list = SanPhamMoiModel.getResult();
+                                sanPhamAdapter  = new SanPhamAdapter(getApplicationContext(),list);
+                                recyclerView.setAdapter(sanPhamAdapter);
+                            }
+                        },
+                        throwable -> {
+                            Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                ));
     }
 
 
@@ -85,5 +105,11 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 }

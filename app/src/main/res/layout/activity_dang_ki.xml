@@ -93,7 +93,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp">
+                    android:layout_marginTop="10sp"
+                    android:id="@+id/layout_pass">
                     <EditText
                         android:id="@+id/edt_pass_register"
                         android:layout_width="match_parent"
@@ -110,15 +111,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/eyes"
-                        tools:layout_editor_absoluteX="277dp"
-                        tools:layout_editor_absoluteY="13dp"
+                        app:layout_constraintRight_toRightOf="@id/layout_pass"
+                        app:layout_constraintTop_toTopOf="@id/layout_pass"
+                        app:layout_constraintBottom_toBottomOf="@id/layout_pass"
                         android:id="@+id/seePass_register"></ImageView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp">
+                    android:layout_marginTop="10sp"
+                    android:id="@+id/layout_repass">
                     <EditText
                         android:id="@+id/edt_pass2_register"
                         android:layout_width="match_parent"
@@ -135,8 +138,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/eyes"
-                        tools:layout_editor_absoluteX="277dp"
-                        tools:layout_editor_absoluteY="13dp"
+                        app:layout_constraintRight_toRightOf="@id/layout_repass"
+                        app:layout_constraintTop_toTopOf="@id/layout_repass"
+                        app:layout_constraintBottom_toBottomOf="@id/layout_repass"
                         android:id="@+id/seePass2_register"></ImageView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -33,6 +34,7 @@ public class DangNhapActivity extends AppCompatActivity {
     TextView dangKi,resetpass;
     EditText edt_email_login,edt_pass_login;
     AppCompatButton button;
+    FirebaseUser user;
     ApiBanHang apiBanHang;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -62,8 +64,8 @@ public class DangNhapActivity extends AppCompatActivity {
         button.setOnClickListener(task1->{
             String email = edt_email_login.getText().toString().trim();
             String pass = edt_pass_login.getText().toString().trim();
+
             loginServer(email,pass);
-            loginFirebase(email,pass);
         });
 
         resetpass.setOnClickListener(new View.OnClickListener() {
@@ -84,59 +86,40 @@ public class DangNhapActivity extends AppCompatActivity {
         }else {
             Paper.book().write("email", email);
             Paper.book().write("pass", pass);
-            compositeDisposable.add(apiBanHang.dangNhap(email,pass)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            userModel -> {
-                                if (userModel.isSuccess() == true){
-                                    isLogin = true;
-                                    Paper.book().write("isLogin",isLogin);
-                                    Utils.currentUser = userModel.getList().get(0);
-                                    Paper.book().write("user",userModel.getList().get(0));
-                                    Intent intent= new Intent(getApplicationContext(),MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            },
-                            throwable -> {
-                                Log.d("tetsadasst", throwable.getMessage() );}
-                    ));
-        }
-    }
 
-    private void loginFirebase(String email, String pass){
-
-        if (TextUtils.isEmpty(email)){
-            Toast.makeText(getApplicationContext(), "Bạn chưa nhập email", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(pass)){
-            Toast.makeText(getApplicationContext(), "Bạn chưa nhập mật khẩu", Toast.LENGTH_SHORT).show();
-        }else {
-            firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        Paper.book().write("email", email);
-                        Paper.book().write("pass", pass);
+            if (user != null) {
+                dangNhap(email,pass);
+            }else{
+                firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        dangNhap(email, pass);
                     }
-                }
-            });
+                });
+            }
         }
     }
 
-    private void login(String email, String pass){
-        firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(DangNhapActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-
-
-                }
-            }
-        });
+    private void dangNhap(String email, String pass){
+        compositeDisposable.add(apiBanHang.dangNhap(email,pass)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        userModel -> {
+                            if (userModel.isSuccess() == true){
+                                isLogin = true;
+                                Paper.book().write("isLogin",isLogin);
+                                Utils.currentUser = userModel.getList().get(0);
+                                Paper.book().write("user",userModel.getList().get(0));
+                                Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+                                startActivity(intent);
+                            }
+                        },
+                        throwable -> {
+                            Log.d("tetsadasst", throwable.getMessage() );}
+                ));
     }
+
 
     private void initView() {
         Paper.init(this);
@@ -156,8 +139,6 @@ public class DangNhapActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-//                            Paper.book().write("isLogin",false);
-//                            loginServer(Paper.book().read("email"),Paper.book().read("pass"));
                         }
                     },1000);
                 }

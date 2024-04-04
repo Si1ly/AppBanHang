@@ -4,6 +4,7 @@ import com.example.appbanhang.Model.DonHangModel;
 import com.example.appbanhang.Model.LoaiSp;
 
 import com.example.appbanhang.Model.LoaiSpModel;
+import com.example.appbanhang.Model.MessagerModel;
 import com.example.appbanhang.Model.SanPhamMoiModel;
 import com.example.appbanhang.Model.User;
 import com.example.appbanhang.Model.UserModel;
@@ -38,7 +39,8 @@ public interface ApiBanHang {
             @Field("email") String email,
             @Field("pass") String pass,
             @Field("username") String username,
-            @Field("mobile") String mobile
+            @Field("mobile") String mobile,
+            @Field("uid") String uid
     );
 
     @POST("dangnhap.php")
@@ -56,7 +58,7 @@ public interface ApiBanHang {
 
     @POST("donhang.php")
     @FormUrlEncoded
-    Observable<UserModel> createOrder(
+    Observable<MessagerModel> createOrder(
             @Field("email") String email,
             @Field("sodienthoai") String sodienthoai,
             @Field("tongtien") String tongtien,
@@ -71,4 +73,26 @@ public interface ApiBanHang {
     Observable<DonHangModel> xemDonHang(
         @Field("iduser") int iduser
     );
+
+    @POST("timkiem.php")
+    @FormUrlEncoded
+    Observable<SanPhamMoiModel> search(
+            @Field("search") String search
+    );
+
+    @POST("updatemomo.php")
+    @FormUrlEncoded
+    Observable<MessagerModel> Updatemomo(
+            @Field("id") int id,
+            @Field("token") String token
+    );
+
+    @POST("updatetoken.php")
+    @FormUrlEncoded
+    Observable<MessagerModel> updateToken(
+            @Field("id") int id,
+            @Field("token") String token
+    );
+
+
 }

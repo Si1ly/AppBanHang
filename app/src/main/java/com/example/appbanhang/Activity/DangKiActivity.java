@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.greenrobot.eventbus.ThreadMode;
 import org.greenrobot.eventbus.android.AndroidLogger;
@@ -49,7 +50,6 @@ public class DangKiActivity extends AppCompatActivity {
         dangKi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dangKiwithServer();
                 dangKiwithFirebase();
             }
         });
@@ -66,12 +66,12 @@ public class DangKiActivity extends AppCompatActivity {
         });
     }
 
-    private void dangKiwithServer() {
+    private void dangKiwithFirebase() {
             String str_email = userEmail.getText().toString().trim();
             String str_pass = userPass.getText().toString().trim();
             String str_repass = userRepass.getText().toString().trim();
             String str_mobile = userSdt.getText().toString().trim();
-            String str_usrename= userName.getText().toString().trim();
+            String str_username= userName.getText().toString().trim();
 
             if (TextUtils.isEmpty(str_email)){
                 Toast.makeText(getApplicationContext(), "Bạn chưa nhập email", Toast.LENGTH_SHORT).show();
@@ -82,22 +82,38 @@ public class DangKiActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Bạn chưa nhập Repass", Toast.LENGTH_SHORT).show();
             }else if (TextUtils.isEmpty(str_mobile)){
                 Toast.makeText(getApplicationContext(), "Bạn chưa nhập số điện thoại", Toast.LENGTH_SHORT).show();
-            }else if (TextUtils.isEmpty(str_usrename)){
+            }else if (TextUtils.isEmpty(str_username)){
                 Toast.makeText(getApplicationContext(), "Bạn chưa nhập tên", Toast.LENGTH_SHORT).show();
             }
             else {
                 if (str_pass.equals(str_repass)){
-                    compositeDisposable.add(apiBanHang.dangky(str_email,str_pass,str_repass,str_mobile)
+                    firebaseAuth.createUserWithEmailAndPassword(str_email,str_pass).addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if(user != null){
+                            postData(str_email,str_pass,str_mobile,str_username,user.getUid());
+                            Toast.makeText(this, user.getUid(), Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                    }
+                });
+                }else {
+                    Toast.makeText(this, "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+    private void postData(String email,String pass,String user,String mobile, String uid) {
+        compositeDisposable.add(apiBanHang.dangky(email,pass,user,mobile,uid)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(
                                     userModel -> {
                                         if (userModel.isSuccess()){
-                                            Utils.currentUser.setEmail(str_email);
-                                            Utils.currentUser.setPass(str_pass);
+                                            Utils.currentUser.setEmail(email);
+                                            Utils.currentUser.setPass(pass);
                                             Intent intent = new Intent(getApplicationContext(),DangNhapActivity.class);
                                             startActivity(intent);
-
                                             finish();
                                         }else {
                                             Toast.makeText(getApplicationContext(), userModel.getMessage(), Toast.LENGTH_SHORT).show();
@@ -107,25 +123,6 @@ public class DangKiActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                             ));
-                }else {
-                    Toast.makeText(this, "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        }
-
-    private void dangKiwithFirebase() {
-        email = userEmail.getText().toString().trim();
-        pass = userPass.getText().toString().trim();
-        firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(task -> {
-           if(task.isSuccessful()){
-               Toast.makeText(this, "Thành công", Toast.LENGTH_SHORT).show();
-               Intent i = new Intent(DangKiActivity.this,DangNhapActivity.class);
-               startActivity(i);
-           }else{
-               Log.d("SADASDAS", task.getException().toString());
-           }
-        });
     }
 
     private void initView() {

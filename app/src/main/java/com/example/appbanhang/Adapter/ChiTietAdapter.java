@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +37,7 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.ChiTietV
     public void onBindViewHolder(@NonNull ChiTietViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.ten.setText(item.getTensp());
-        holder.sl.setText("Số lượng " + item.getSoluong()+"");
+        holder.sl.setText("Số lượng " + item.getSl());
         Glide.with(context).load(item.getHinhanh()).into(holder.imageView);
     }
 

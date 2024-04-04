@@ -4,7 +4,7 @@ public class Item {
     int id;
     String tensp;
     String hinhanh;
-    int soluong;
+    int sl;
 
     public int getId() {
         return id;
@@ -30,11 +30,12 @@ public class Item {
         this.hinhanh = hinhanh;
     }
 
-    public int getSoluong() {
-        return soluong;
+    public int getSl() {
+        return sl;
     }
 
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
+    public void setSl(int sl) {
+        this.sl = sl;
     }
 }
+
