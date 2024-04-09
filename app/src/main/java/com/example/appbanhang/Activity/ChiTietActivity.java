@@ -1,6 +1,7 @@
 package com.example.appbanhang.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
@@ -33,6 +34,7 @@ public class ChiTietActivity extends AppCompatActivity {
     NotificationBadge notificationBadge;
     FrameLayout frameLayout;
 
+    AppCompatButton bt_yt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,15 @@ public class ChiTietActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 themGioHang();
+            }
+        });
+
+        bt_yt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),YouTubeActivity.class);
+                intent.putExtra("linkvideo",sanPhamMoi.getLink());
+                startActivity(intent);
             }
         });
     }
@@ -122,6 +133,7 @@ public class ChiTietActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         notificationBadge = findViewById(R.id.menu_sl);
         frameLayout = findViewById(R.id.frame_chiTiet);
+        bt_yt = findViewById(R.id.bt_youtube);
         frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

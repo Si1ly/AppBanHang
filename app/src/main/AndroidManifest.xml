@@ -16,46 +16,57 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.SplashActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.NoActionBar"/>
-        <activity
-            android:name=".Activity.ResetPassActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.NoActionBar"/>
-        <activity
-            android:name=".Activity.DangKiActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Design.NoActionBar"></activity>
-        <activity
-            android:name=".Activity.DangNhapActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Design.NoActionBar"></activity>
-        <activity
-            android:name=".Activity.SearchActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.NoActionBar"/>
-        <activity
-            android:name=".Activity.XemDonActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.NoActionBar"/>
-        <activity
-            android:name=".Activity.ThanhToanActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.NoActionBar"/>
-        <activity
-            android:name=".Activity.SanPhamActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.NoActionBar"/>
-        <activity
-            android:name=".Activity.GioHangActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Design.NoActionBar"/>
-        <activity
-            android:name=".Activity.ChiTietActivity"
+            android:name=".Activity.KhuyenMaiActivity"
             android:exported="false"
             android:theme="@style/Theme.Design.NoActionBar"
             />
+        <activity
+            android:name=".Activity.YouTubeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.MeetingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.ResetPassActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.DangKiActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.DangNhapActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.XemDonActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.ThanhToanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.SanPhamActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.GioHangActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Activity.ChiTietActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".Activity.MainActivity"
             android:exported="true"
@@ -67,10 +78,11 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".Service.FirebaseMessagerReceiver"
+        <service
+            android:name=".Service.FirebaseMessagerReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

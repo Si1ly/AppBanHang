@@ -12,4 +12,30 @@ public class Utils {
     public static List<GioHang> mangGiohang;
     public static List<GioHang> mangMuahang = new ArrayList<>();
     public static User currentUser = new User();
+
+    public static String statusOrder(int status){
+        String result ="";
+        switch (status) {
+            case 0:
+                result = " Đơn hàng đang đợi xác nhận";
+                break;
+            case 1:
+                result = " Đơn hàng xác nhận thành công";
+                break;
+            case 2:
+                result = " Giao cho đơn vị vận chuyển";
+                break;
+            case 3:
+                result = " Giao thành công";
+                break;
+            case 4:
+                result = " Đơn đã hủy";
+                break;
+            default:
+                result = "";
+                break;
+        }
+        return result;
+    }
+
 }

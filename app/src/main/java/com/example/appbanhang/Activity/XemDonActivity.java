@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.appbanhang.Adapter.DonHangAdapter;
+import com.example.appbanhang.InterfaceUsing.ItemDeleteClickListener;
 import com.example.appbanhang.R;
 import com.example.appbanhang.Retrofit.ApiBanHang;
 import com.example.appbanhang.Retrofit.RetrofitClient;
@@ -41,7 +44,12 @@ public class XemDonActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         donHangModel -> {
-                            DonHangAdapter donHangAdapter = new DonHangAdapter(getApplicationContext(),donHangModel.getResult());
+                            DonHangAdapter donHangAdapter = new DonHangAdapter(getApplicationContext(), donHangModel.getResult(), new ItemDeleteClickListener() {
+                                @Override
+                                public void onClickDelete(int iddonhang) {
+                                    showDeleteOrder(iddonhang);
+                                }
+                            });
                             recyclerView_xemdon.setAdapter(donHangAdapter);
                         },
                         throwable -> {
@@ -49,6 +57,36 @@ public class XemDonActivity extends AppCompatActivity {
                         }));
     }
 
+    private void showDeleteOrder(int iddonhang) {
+        PopupMenu popupMenu = new PopupMenu(this,recyclerView_xemdon.findViewById(R.id.tv_trangthai));
+        popupMenu.inflate(R.menu.delete);
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.delete){
+                    deleteOrder(iddonhang);
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void deleteOrder(int iddonhang){
+            compositeDisposable.add(apiBanHang.deleteorder(iddonhang)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            messagerModel -> {
+                                if (messagerModel.isSuccess()){
+                                    getOrder();
+                                }
+                            },
+                            throwable -> {
+                                Log.d("log",throwable.getMessage());
+                            }
+                    ));
+    }
     private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

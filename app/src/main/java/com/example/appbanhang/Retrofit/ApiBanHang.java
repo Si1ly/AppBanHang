@@ -1,6 +1,7 @@
 package com.example.appbanhang.Retrofit;
 
 import com.example.appbanhang.Model.DonHangModel;
+import com.example.appbanhang.Model.KhuyenMaiModel;
 import com.example.appbanhang.Model.LoaiSp;
 
 import com.example.appbanhang.Model.LoaiSpModel;
@@ -94,5 +95,11 @@ public interface ApiBanHang {
             @Field("token") String token
     );
 
+    @GET("khuyenmai.php")
+    Observable<KhuyenMaiModel> getkhuyenmai();
 
+    @POST("deleteorder.php")
+    @FormUrlEncoded
+    Observable<MessagerModel> deleteorder(
+            @Field("iddonhang") int id);
 }

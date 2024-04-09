@@ -9,6 +9,15 @@ public class SanPhamMoi implements Serializable {
     String giasp;
     String mota;
     int loai;
+    String link;
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public int getId() {
         return id;

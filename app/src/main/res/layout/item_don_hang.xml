@@ -25,6 +25,17 @@
             android:textColor="@color/red"
             android:padding="5sp"
             android:layout_marginLeft="5sp"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_trangthai"
+            android:text="Trang Thai"
+            android:textStyle=""
+            android:textSize="20sp"
+            android:textColor="@color/black"
+
+            android:layout_marginLeft="5sp"></TextView>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/recycleView_chitiet"
