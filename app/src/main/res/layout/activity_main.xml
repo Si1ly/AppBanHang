@@ -20,7 +20,7 @@
                 android:id="@+id/Toolbarmanhinhchinh"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/teal_200"
+                android:background="@color/primary"
                 app:title="Trang chính">
                 <FrameLayout
                     android:id="@+id/frame_main"
@@ -72,14 +72,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#5992d2"
+                android:background="@color/primary"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Sản Phẩm Mới Nhất"
-                    android:textColor="@color/red"
+                    android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"></TextView>
 
@@ -88,7 +88,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"></androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </LinearLayout>
 

@@ -47,9 +47,16 @@
              />
         <activity
             android:name=".Activity.DangNhapActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-             />
+            android:exported="true">
+
+<!--            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"-->
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activity.SearchActivity"
             android:exported="false"
@@ -62,9 +69,19 @@
              />
         <activity
             android:name=".Activity.ThanhToanActivity"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-             />
+            android:launchMode="singleTask"
+             >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="demozpdk"
+                    android:host="app" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".Activity.SanPhamActivity"
             android:exported="false"
@@ -85,11 +102,7 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service

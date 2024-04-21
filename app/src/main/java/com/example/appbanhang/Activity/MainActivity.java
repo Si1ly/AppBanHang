@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 });
                             }else {
-                                Toast.makeText(getApplicationContext(), "erro", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Chưa có view quảng cáo", Toast.LENGTH_SHORT).show();
                             }
 
                         } ,

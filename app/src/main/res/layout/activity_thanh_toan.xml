@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_Thanhtoan"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/teal_200"
+        android:background="@color/primary"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Thanh toán"></androidx.appcompat.widget.Toolbar>
 
@@ -119,17 +119,18 @@
         tools:layout_editor_absoluteX="5dp"></androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_thanhtoanMM_tt"
+        android:id="@+id/bt_thanhtoanZaloPay_tt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5sp"
         android:layout_marginTop="20sp"
         android:background="@drawable/bt_corner"
-        android:text="Đặt hàng và thanh toán Momo"
+        android:text="Đặt hàng và thanh toán ZaloPay"
         android:textColor="@color/red"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bt_Dathang_tt"
-        tools:layout_editor_absoluteX="5dp"></androidx.appcompat.widget.AppCompatButton>
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="4dp"></androidx.appcompat.widget.AppCompatButton>
 </androidx.constraintlayout.widget.ConstraintLayout>

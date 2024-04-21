@@ -41,6 +41,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.7.6'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
+    implementation fileTree(dir: 'D:\\WorkSpace\\zalopay', include: ['*.aar', '*.jar'], exclude: [])
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -66,4 +67,9 @@ dependencies {
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
 
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
+
+    //zalopay
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("commons-codec:commons-codec:1.14")
+
 }
