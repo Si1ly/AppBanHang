@@ -172,7 +172,7 @@ public class ThanhToanActivity extends AppCompatActivity {
                                             messagerModel -> {
                                                 if (messagerModel.isSuccess()){
                                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                    Toast.makeText(getApplicationContext(), "Xin may dau", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), "Xin may day", Toast.LENGTH_SHORT).show();
                                                     startActivity(intent);
                                                     finish();
                                                 }

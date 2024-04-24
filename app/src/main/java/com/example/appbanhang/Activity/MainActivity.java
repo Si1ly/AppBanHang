@@ -144,15 +144,25 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(hoaqua);
                         break;
                     case 2:
-                        Intent dokho = new Intent(getApplicationContext(), SanPhamActivity.class);
-                        dokho.putExtra("loai",2);
-                        startActivity(dokho);
+                        Intent tra = new Intent(getApplicationContext(), SanPhamActivity.class);
+                        tra.putExtra("loai",2);
+                        startActivity(tra);
+                        break;
+
+                    case 3:
+                        Intent thit = new Intent(getApplicationContext(), SanPhamActivity.class);
+                        thit.putExtra("loai",3);
+                        startActivity(thit);
                         break;
                     case 4:
                         Intent xemdon = new Intent(getApplicationContext(), XemDonActivity.class);
                         startActivity(xemdon);
                         break;
                     case 5:
+                        Intent lienhe = new Intent(getApplicationContext(),ThongTinActivity.class);
+                        startActivity(lienhe);
+                        break;
+                    case 6:
                         Paper.book().delete("user");
                         FirebaseAuth.getInstance().signOut();
                         Intent dangnhap = new Intent(getApplicationContext(),DangNhapActivity.class);

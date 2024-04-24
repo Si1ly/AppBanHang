@@ -86,6 +86,9 @@ public class SanPhamActivity extends AppCompatActivity {
                 sanPhamMoiList.remove(sanPhamMoiList.size()-1);
                 sanPhamAdapter.notifyItemRemoved(sanPhamMoiList.size());
                 page = page +1;
+                getData(page,loai);
+                sanPhamAdapter.notifyDataSetChanged();
+                isLoading = false;
             }
         },2000);
     }
@@ -96,9 +99,23 @@ public class SanPhamActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         sanPhamMoiModel -> {
-                            sanPhamMoiList = sanPhamMoiModel.getResult();
-                            sanPhamAdapter = new SanPhamAdapter(getApplicationContext(),sanPhamMoiList);
-                            recyclerView.setAdapter(sanPhamAdapter);
+                            if(sanPhamMoiModel.isSuccess()){
+                                if(sanPhamAdapter == null) {
+                                    sanPhamMoiList = sanPhamMoiModel.getResult();
+                                    sanPhamAdapter = new SanPhamAdapter(getApplicationContext(), sanPhamMoiList);
+                                    recyclerView.setAdapter(sanPhamAdapter);
+                                }else{
+                                    int vitri = sanPhamMoiList.size()-1;
+                                    int soluongadd = sanPhamMoiModel.getResult().size();
+                                    for(int i =0;i<soluongadd;i++){
+                                        sanPhamMoiList.add(sanPhamMoiModel.getResult().get(i));
+                                    }
+                                    sanPhamAdapter.notifyItemRangeInserted(vitri,soluongadd);
+                            }
+                            }else{
+                                isLoading = true;
+                            }
+
                         }));
     }
 

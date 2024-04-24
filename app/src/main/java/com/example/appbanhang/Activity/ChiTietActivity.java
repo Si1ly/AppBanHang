@@ -114,7 +114,7 @@ public class ChiTietActivity extends AppCompatActivity {
         sanPhamMoi = (SanPhamMoi) getIntent().getSerializableExtra("chitiet");
         ten.setText(sanPhamMoi.getTensp());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        gia.setText("Price: " + decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp())));
+        gia.setText("Price: " + sanPhamMoi.getGiasp());
         mota.setText(sanPhamMoi.getMota());
         Glide.with(getApplicationContext()).load(sanPhamMoi.getHinhanh()).into(anh);
         Integer[] so = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
