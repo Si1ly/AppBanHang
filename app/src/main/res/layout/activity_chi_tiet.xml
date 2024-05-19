@@ -87,47 +87,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Thêm vào giỏ hàng"
-                android:textColor="@color/red"
+                android:textColor="@color/black"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="15dp"></Button>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
-        app:layout_constraintTop_toBottomOf="@id/layout_1"
-        android:orientation="vertical"
-app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        >
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_1">
+
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/red"
             android:id="@+id/bt_youtube"
-            android:text="Xem video"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </androidx.appcompat.widget.AppCompatButton>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Xem video"
+            android:textColor="@color/black"></androidx.appcompat.widget.AppCompatButton>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mô tả chi tiết sản phẩm"
             android:layout_marginLeft="10dp"
-            android:textSize="18dp"
             android:layout_marginTop="5dp"
+            android:text="Mô tả chi tiết sản phẩm"
+            android:textSize="18dp"
             android:textStyle="bold"></TextView>
-        
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
+                android:paddingBottom="10dp"
                 android:id="@+id/tv_mieutaChitiet"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                ></TextView>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="18sp"></TextView>
         </ScrollView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

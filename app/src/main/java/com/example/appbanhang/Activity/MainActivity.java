@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
     private void anhxa(){
         toolbar = findViewById(R.id.Toolbarmanhinhchinh);
         recyclerViewmanhinhchinh = findViewById(R.id.recyclewview);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,3);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerViewmanhinhchinh.setLayoutManager(layoutManager);
         recyclerViewmanhinhchinh.setHasFixedSize(true);
         navigationView = findViewById(R.id.navigationview);

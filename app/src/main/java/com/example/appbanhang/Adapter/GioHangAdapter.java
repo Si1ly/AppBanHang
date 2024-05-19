@@ -52,7 +52,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         holder.item_gioHang_ten.setText(gioHang.getTensp());
         Glide.with(context).load(gioHang.getHinhsp()).into(holder.item_gioHang_image);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.item_gioHang_gia.setText(decimalFormat.format(gioHang.getGiasp()));
+        holder.item_gioHang_gia.setText(String.valueOf(gioHang.getGiasp()));
         long sum = gioHang.getSl() * gioHang.getGiasp();
         holder.item_gioHang_sumgia.setText(decimalFormat.format(sum));
         holder.setImageClickListener(new ImageClickListener() {

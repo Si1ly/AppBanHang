@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:id="@+id/toolbar_xemdon"
-    app:title="Xem don"
+    app:title="Xem Đơn"
     android:background="@color/primary"
     app:layout_constraintTop_toTopOf="parent"
     android:layout_margin="5sp"

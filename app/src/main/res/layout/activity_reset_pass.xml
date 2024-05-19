@@ -5,36 +5,28 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ResetPassActivity">
+    tools:context=".Activity.ResetPassActivity"
+    android:theme="@style/Theme.AppCompat.Light">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputEditText
+        android:layout_height="60sp"
         android:id="@+id/edtreset"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@id/btnreset"
+        android:hint="Nhập email của bạn"
+        android:textSize="24sp"
         android:background="@drawable/custom_edittext"
-        android:hint="Email"
-        android:paddingLeft="10dp"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533"></com.google.android.material.textfield.TextInputEditText>
+        android:paddingLeft="25sp"
+        android:layout_margin="5sp"></EditText>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnreset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="270dp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
         android:hint="Quên mật khẩu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

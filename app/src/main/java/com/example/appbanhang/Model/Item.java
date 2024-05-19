@@ -6,6 +6,16 @@ public class Item {
     String hinhanh;
     int sl;
 
+    int trangthai;
+
+    public int getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
+    }
+
     public int getId() {
         return id;
     }

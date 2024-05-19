@@ -31,21 +31,25 @@
             android:id="@+id/name_dt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="Tên"
+            android:textStyle="bold"
+            android:gravity="right"
             android:textSize="20dp"></TextView>
         <TextView
             android:id="@+id/gia_dt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Price"
-            android:textColor="@color/red"
-            android:textSize="20dp"></TextView>
+            android:text="Giá"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:gravity="right"></TextView>
         <TextView
             android:id="@+id/mota_dt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mô tả"
-            android:textSize="16sp"></TextView>
+            android:textSize="16sp"
+            android:gravity="right"></TextView>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

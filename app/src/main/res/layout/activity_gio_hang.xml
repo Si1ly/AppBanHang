@@ -38,7 +38,6 @@
     app:layout_constraintBottom_toTopOf="@id/gioHang_MuaHang"
     android:weightSum="2"
     android:orientation="horizontal"
-    android:background="@color/black"
     android:layout_margin="5sp"
     >
     <TextView
@@ -48,11 +47,12 @@
         android:textSize="18sp"
         android:text="Tổng Tiền: "
         android:layout_weight="1"
-        android:textColor="@color/red"
+        android:textColor="@color/black"
         android:padding="5sp"
         android:layout_marginLeft="10sp"
         ></TextView>
     <TextView
+        android:paddingRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="right"
@@ -62,7 +62,7 @@
         android:id="@+id/tv_TongTien"
         android:layout_marginRight="20sp"
         android:layout_weight="1"
-        android:textColor="@color/red"></TextView>
+        android:textColor="@color/black"></TextView>
 </LinearLayout> 
     <Button
         android:id="@+id/gioHang_MuaHang"

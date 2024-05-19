@@ -41,7 +41,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.DonHangV
     public void onBindViewHolder(@NonNull DonHangViewHolder holder, int position) {
         DonHang donHang = list.get(position);
         holder.tv_donHang.setText("Đơn hàng: " + donHang.getId()+"");
-        holder.tv_trangThai.setText(Utils.statusOrder(donHang.getTrangthai()));
+        holder.tv_trangThai.setText(Utils.statusOrder(donHang.getTrangthai())  );
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {

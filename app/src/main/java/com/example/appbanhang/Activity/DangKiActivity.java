@@ -89,11 +89,16 @@ public class DangKiActivity extends AppCompatActivity {
                 if (str_pass.equals(str_repass)){
                     firebaseAuth.createUserWithEmailAndPassword(str_email,str_pass).addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if(user != null){
-                            postData(str_email,str_pass,str_mobile,str_username,user.getUid());
-                            Toast.makeText(this, user.getUid(), Toast.LENGTH_SHORT).show();
-                        }
+                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                if(user != null){
+                                    postData(str_email,str_pass,str_mobile,str_username,user.getUid());
+                                }
+                            }
+                        });
+
                     }else{
                     }
                 });

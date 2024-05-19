@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Utils {
     //Them dia chi localhost
-    public static final String BASE_URL="http://192.168.0.102/banhang/";
+    public static final String BASE_URL="http://172.31.28.130/banhang/";
     public static List<GioHang> mangGiohang;
     public static List<GioHang> mangMuahang = new ArrayList<>();
     public static User currentUser = new User();

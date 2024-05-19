@@ -73,16 +73,16 @@ public class ChiTietActivity extends AppCompatActivity {
                 //done
                 if (Utils.mangGiohang.get(i).getIdsp() == sanPhamMoi.getId()) {
                     Utils.mangGiohang.get(i).setSl(sl + Utils.mangGiohang.get(i).getSl());
-                    long gia = Long.parseLong(sanPhamMoi.getGiasp());
-                    Utils.mangGiohang.get(i).setGiasp(gia);
+                    String gia = sanPhamMoi.getGiasp();
+                    Utils.mangGiohang.get(i).setGiasp(Long.parseLong(gia));
                     flag = true;
                 }
             }
             if (flag == false) {
                 //done
-                long gia = Long.parseLong(sanPhamMoi.getGiasp());
+                String gia = sanPhamMoi.getGiasp();
                 GioHang gioHang = new GioHang();
-                gioHang.setGiasp(gia);
+                gioHang.setGiasp(Long.parseLong(gia));
                 gioHang.setSl(sl);
                 gioHang.setIdsp(sanPhamMoi.getId());
                 gioHang.setTensp(sanPhamMoi.getTensp());
@@ -94,9 +94,9 @@ public class ChiTietActivity extends AppCompatActivity {
         } else {
             //done
             int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
-            long gia = Long.parseLong(sanPhamMoi.getGiasp());
+            String gia = sanPhamMoi.getGiasp();
             GioHang gioHang = new GioHang();
-            gioHang.setGiasp(gia);
+            gioHang.setGiasp(Long.parseLong(gia));
             gioHang.setSl(soluong);
             gioHang.setIdsp(sanPhamMoi.getId());
             gioHang.setTensp(sanPhamMoi.getTensp());
@@ -114,7 +114,7 @@ public class ChiTietActivity extends AppCompatActivity {
         sanPhamMoi = (SanPhamMoi) getIntent().getSerializableExtra("chitiet");
         ten.setText(sanPhamMoi.getTensp());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        gia.setText("Price: " + sanPhamMoi.getGiasp());
+        gia.setText("Giá: " + sanPhamMoi.getGiasp());
         mota.setText(sanPhamMoi.getMota());
         Glide.with(getApplicationContext()).load(sanPhamMoi.getHinhanh()).into(anh);
         Integer[] so = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

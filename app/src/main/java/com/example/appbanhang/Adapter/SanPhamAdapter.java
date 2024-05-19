@@ -52,7 +52,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             SanPhamMoi sanPhamMoi = array.get(position);
             dienThoaiViewHolder.ten.setText(sanPhamMoi.getTensp());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            dienThoaiViewHolder.gia.setText("Price " + sanPhamMoi.getGiasp());
+            dienThoaiViewHolder.gia.setText("Giá: " + sanPhamMoi.getGiasp());
             Glide.with(context).load(sanPhamMoi.getHinhanh()).into(dienThoaiViewHolder.hinhanh);
             dienThoaiViewHolder.setItemClickListener(new ItemClickListener() {
                 @Override
